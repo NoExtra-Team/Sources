@@ -1,0 +1,55 @@
+In einer eMail vom 12.02.2007 13:47:10 Westeuropäische Normalzeit schreibt fsagez@yahoo.fr:
+
+
+> Hi Torsten !
+>
+> I send you the menu source dcd-12x that you can re-use as a dcd menu no 136. If I remember, we have a lot of problems with dbug intro... I meet you to see the read me file.
+>
+> For the menu no 137, I've the orginal source but when I testing it on real ST, I see 2 bombs instead of a "nice" reset. I'll return towards you when I debug completely it.
+> I post here the final scrolltext, if you want to rewrite it...
+> "
+> A NEW DAY, A NEW INTRO...
+>
+> BLUE SOFTWARE PRESENTS A NEW BSW DCD NUMBER 136 : PRESS KEYBOARD FOR
+> F1-ETERNITY SAMPLE OVERSCAN SCREEN, F2-FANATICS DENTRO, F3-OUTLINE 2005 INVITRO,
+> F4-PARACON 6 INVITRO, F5-PENTA (A NEW GAME FROM PARADIZE), F6-JAGUAR CONNEXION 2005 INVITRO (ENGLISH),
+> F7-JAGUAR CONNEXION 2005 INVITRO (FRENCH), F8-T2 INTRO, F9-DCD DOCS AND ESC-CRC CHECK.
+>
+> SPECIAL GREETS :
+> ALL TSCC MEMBERS (CONDEMNS GREAT YOUR NEW FALCON DEMO BEAMS).
+> TPAU OF BAC (MY OLDEST CONTACT FROM THE ATARI SCENE).
+> ALL MEMBERS FROM VECTRONIX AND ICS.
+> ALL MEMBERS FROM THE GAME COMPILATION CREWS FUZION, AUTOMATION, BBC, FOF, D-BUG, ZUUL, POMPEY PIRATES AND MEDWAY BOYS.
+> BITMASTER (THANKS FOR THE PLANEMAPPER - NEW VERSION).
+> NOXTRA (THANX FOR THE SUPPORT).
+> FREDDO (GREAT WORK! THE NEW LOADER WORKS FINE).
+> ALL MEMBERS FROM THE DEMO COMPILATION CREWS RIPPED OFF, POV, NEW POWER GENERATION, STAX, ANIMAL MINE, EFFECT, FUTURE MINDS AND STRANGER.
+> ALL MEMBERS FROM WWW.ATARI-FORUM.COM.
+> AND ALL, WICH I FORGOT....
+> --- part Atomus ---
+> NOEXTRA IS FURIOUSLY ACTIVE FOR MORE INTRO GUYS! BIG THANKS FOR ALL GFXS BY MISTER A AND FOR THE 3D CODE BY ZORRO2 HIMSELF!
+> MAIN CODE BY ATOMUS WHO APOLOGIZE FOR THE SCROLLING -BUG- DUE TO A 3D EFFECT WHO WORK IN REAL TIME... IN OVERSCAN... (BOTTOM ONLY!)
+> MUSIC BY FRAZER, IT COMES FROM THE BEST COMPILATION OF PHF BY GRAZEY. THANKS DUDE TO SHARE ALL THIS MUSICS!
+> THIS COMPILATION COME FROM THE BYTE OF TCE AND HE PACK AND REPACK HIMSELF FOR MORE STUFF ON THIS FLOPPY!
+>
+> THIS PIECE OF CODETRO HAS BEEN FINISHED NEAR THE 29 MAY 2005 IN FRANCE :-)
+> "
+>
+> A++
+> FrEd!
+
+
+Hihooooooo Fred!
+
+I fight with your SOURCE code.  O.o
+With which assembler do I have to work? I tried turbo-assembler and DevPac 2.0 / 3.10.....
+Unfortunately without success.
+Turbo-assembler cannot read the sourcecode in error free and Devpac produces an incorrect menu when assembling :-(
+
+Please assemble for me the menu with the complete Scrolltext. I send you in addition the original email again.
+
+I have now begun write a database, in which all relevant demo Compils with contents are seized. Hard work for several months.....
+
+Thanks again :-D
+
+...Torsten  -  The Byte / TCE
