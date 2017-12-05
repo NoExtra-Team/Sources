@@ -1,0 +1,54 @@
+   _/|\_     _/~\_     _/|       _   _     _/~\_     _/~\_    
+  /~ | *\ _ /~   *\ _ /~ |      /~ | *\ _ /~   *\ _ /~  __\   
+ /   |   \~/   |   \~/   |     /   |   \~/       \~/   |      
+|    |    V    |    V    |    |    |    V    |    V    |___   
+|    |    |    |    |    |    |    |    |    |    |     ___)  
+|    |    |    |    |    |____|    |    |    |    |    |____  
+|    |    |    |    |    |    )    |    |    |    |         ) 
+|    |    A    |    A    |    A    |    A    |    A         / 
+ \       /~\       /~\       /~\       /~\   |   /~\       / T
+  \     /   \     /   \     /   \     /   \  |  /   \     /  W
+   \_ _/     \_ _/     \_ _/     \_ _/     \_|_/     \_ _/   O
+
+-=^=- The best compilation of unseen's Atari ST demo ? -=^=-
+
+No Name          Coded by        Crew                 Date 
+----------------------------------------------------------
+1) BIGZ782.PRG   DBUG II         NEXT                 1991
+                 DR CLICK        TTZP                 
+2) BIS_CD_1.PRG  ANTHARION       BUG IN SPACE         1992
+3) DEMOB100.PRG  FRNZ            AVENGERS             1991
+4) HEADACHE.PRG  HUMUNGUS        OVERLANDERS          1991
+                 DOGUE DE MAUVE                       
+5) INVSIBLE.PRG  RICK            INVISIBLES           1990 
+6) KEKE.PRG      ZORRO2          MJJPROD              2003
+7) DRKLIGHT.PRG  WARRIOR MUNK    poSTmortem           2002
+8) NGT.PRG       BLOOD           NEW GENERATION       1989
+9) LANDSCAP.PRG  AATEC           ST APOCALYPSE        1990
+10)TWSTSCR2.PRG  GRIFF           RESISTANCE           1989
+
+Menu code......................Zorro 2
+Loader code....................Maartau/Zorro 2
+Gfxs...........................Mister.A
+Fonts..........................ripped
+Music..........................TomChi
+Scrolltext.....................Atomus
+
+Require configuration : Atari STF or STE computer with 1 Mo of memory.
+
+Thanks to Brume, this compilation saw the day through to him !
+
+A special thought for Andreas Wahlin (aka Perihelion/Warrior Munk)
+who left us much too soon...
+
+To copy this disk : 2 faces - 82 pistes - 10 sectors
+
+  __/\________  __/\________ ___/|________________/\    /\_____      
+  \ o  ______/  \ /o        /\_/o_\__________   _   \  /o   _  \   
+  //    __)__   //         /  //   \     /o    |_|   \//   | |  \  
+ //          \ //    \/    \ //     \   //    _____  //    |_|   \ 
+/             /      /\     \/       \ //     |   / //      _     \
+\ ____________\ __ _________/\_______/ \ _____|   \_\ _____| |____/
+ \|            \|             \|        \|           \|    
+Compilation EXTRA >>Volume 2<< in 2012 By NoExtra.
+                   Visit our website : http://www.noextra-team.com/

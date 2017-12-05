@@ -1,0 +1,65 @@
+ ....  .................................................................  .... 
+ :  :  :        __________________            __________________       :  :  : 
+ :..:..:       \\                 \          \\                 \      :..:..: 
+    :     ______\\________         \___ ______\\___________      \___     :    
+ ...:    |               |             |                 /           |    :... 
+ :       :               |             |                /            :       : 
+ :       .               :             :               '             .       : 
+ :      _/(____        _/(            _/(_______      _/(____        _/(____ . 
+ .   __\\___   \_   __\\  \/\      __\\   ___   \____\\__    \_   __\\___   \_ 
+  __/      /    /__/      /  \_ __/       /     __/ ____/     /__/      /    / 
+ \\_    _______/_\_     _/   _/_\        /      \_  \       _/_\_     __   _/_ 
+  /     \        /     __        \____  /       /    \__       /      /       \
+ /      /       /      /         /    \/       /      /       /      /    2o13/
+/      /      _/      /         /     /      _/      /      _/      /        / 
+\______       \______/_        /     /       \______/_      \______/_       /  
+     /         /    /         / SNS /         /    /         /    /        /   
+ .   \_______e_\\   \_______x_\\    \_______t_\\   \_______r_\\   \______a_\\  
+ :...    .               ._____________.                _____________.    .... 
+    :    |_____________n_|             |_____________o_//                 :    
+ ...:...                                                               ...:... 
+ :  :  :          n     o           e     x     t     r     a          :  :  : 
+ :..:  :...............................................................:  :..: 
+
+
+                Compilation EXTRA >>Volume 4<< in 2013 By NoExtra
+
+
+          -=^=- The best compilation of unseen's Atari ST intro ? -=^=-
+
+      No  Name          Coded by   Group         Title
+      ---------------------------------------------------------------------
+      01  AW      .PRG  BAD BOYS   REPLICANTS    AIR WARRIORS CRACKTRO
+      02  FUZION  .PRG  KELLY.X    FUZION        NEW INTRODUCTION OF FUZION
+      03  INTRO   .PRG  unknow?    unknow?       REPLICANTS INTRO NOT USED
+      04  INVIZI  .PRG  RAVEN      INVIZIBLES    INVIZIBLES OF FLEXICHRON
+      05  MC3     .PRG  ALTAIR     MCS & VMAX    3615-MC3 PUBTRO
+      06  MJJ     .PRG  BIGFOOT    MJJPROD       LOUSY SCREEN
+      07  RADIATIO.PRG  DEVIL      RADIATION     DRAWIN' CD MENU
+      08  REPS-PUL.PRG  TWIN       PULSION       HOOK CRACKTRO
+      09  SCREEN  .PRG  SKY METAL  OVERLANDERS   OVERTOWN (Only STF)
+      10  SPHERICA.PRG  GRAPH7     CYG           SPHERICAL DEMO
+      11  STKPHAL .PRG  KELLY.X    ST KNIGHTS    PHALEON STE DEMO SCREEN
+      12  TTZP    .PRG  DBUG II    T.T.Z.P. Inc  HIGH SCROLL (Only STF)
+
+ Compatible emulators Steem v3.2, Saint v2.21 and Hatari v1.6.2.
+ If you want to see screens number 9 and 12 on STEEM emulator, you need to use 
+ STEEM SSE v3.41 with SSE options with ST Model at "STF".
+
+ Special thanks for this compilation at Altair/VMAX^MCS, Brume/AL, Cyg/BlaBla, 
+ Indy/FNT, Jace/St Knights, Mcoder, Senser/Typhoon and Zorro 2.
+ Big thanks to Fr‚d‚ric Bautista aka Altair to permit to spread all the sources 
+ of ATOMIK CRUNCHER on this compilation.
+
+      Menu code......................Zorro 2
+      Loader code....................Maartau/Zorro 2
+      Gfx............................Mister.A
+      Fonts..........................ripped
+      Music..........................TomChi
+      NFO file.......................Senser/Typhoon
+      Scrolltexts....................Jace/St Knights and Cyg/BlaBla
+
+ Required configuration : Atari STF or STE with 1 Mo of memory.
+ 
+ Visit our website         : http://www.noextra-team.com/
+ Join the Force on FB here : https://www.facebook.com/groups/NoExtraTeam/

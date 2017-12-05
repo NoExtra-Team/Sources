@@ -1,0 +1,64 @@
+  ....  .................................................................  ....
+  :  :  :        __________________            __________________       :  :  :
+  :..:..:       \\                 \          \\                 \      :..:..:
+     :     ______\\________         \___ ______\\___________      \___     :
+  ...:    |               |             |                 /           |    :...
+  :       :               |             |                /            :       :
+  :       .               :             :               '             .       :
+  :      _/(____        _/(            _/(_______      _/(____        _/(____ .
+  .   __\\___   \_   __\\  \/\      __\\   ___   \____\\__    \_   __\\___   \_
+   __/      /    /__/      /  \_ __/       /     __/ ____/     /__/      /    /
+  \\_    _______/_\_     _/   _/_\        /      \_  \       _/_\_     __   _/__
+   /     \        /     __        \____  /       /    \__       /      /        \
+  /      /       /      /         /    \/       /      /       /      /    2o13 /
+_/      /      _/      /         /     /      _/      /      _/      /         /
+\_______       \______/_        /     /       \______/_      \______/_        /
+      /         /    /         / sns /         /    /         /    /         /
+  .   \_______e_\\   \_______x_\\    \_______t_\\   \_______r_\\   \_______a_\\
+  :...    .               ._____________.                _____________.    ....
+     :    |_____________n_|             |_____________o_//                 :   
+  ...:...                                                               ...:...
+  :  :  :          N     O           E     X     T     R     A          :  :  :
+  :..:  :...............................................................:  :..:
+
+
+                Compilation EXTRA >>Volume 6<< in 2015 By NoExtra
+
+
+          -=^=- The best compilation of unseen's Atari ST intro ? -=^=-
+
+      No  Name          Coded by    Group          Title
+      ---------------------------------------------------------------------
+      01  BIG     .PRG  POWER DRONE IMAGINA        THE SPRITE DEMO
+      02  BIGSC   .PRG  MOODST      AL             DCK PACIDEMO CONTEST
+      03  CREM    .PRG  C-REM       MJJPROD        PRESENTATION OF EMERIC
+      04  DEATH   .PRG  MR NOURS    MJJPROD        DCK PACIDEMO CONTEST
+      05  EQNX_PRO.PRG  CHECKSUM    EQUINOX        PRESENTATION OF DIGITAL
+                                                   MUSIC COMPOSER
+      06  INVISIBL.PRG  TRACK FORCE THE INVISIBLES VERMINATOR INTRO
+      07  KLASS   .PRG  BYTHE       THE JACOBS     CHAMPION MANAGER ITALIA INTRO
+                                    CREAM CRACKERS
+      08  RADIACD4.PRG  SHADOW      RADIATION      DOMPUB COMPIL 4
+      09  REDIRTS .PRG  STRIDER     MJJPROD        DCK PACIDEMO CONTEST
+      10  TRSCRY26.PRG  FRNZ        AVENGERS       HAPPY HALLOWEEN
+      11  VECTORBL.PRG  LARCOCIEL   DMA            1ST VECTORBALL DEMO ON THE ST
+      12  ZOVOGMA .PRG  CYG         BLABLA         ZOVOGMA DEMO
+
+ Compatible emulators Steem, Steem SSE, Saint and Hatari.
+
+ Special thanks for this compilation at Brume/AL, Cyg/BlaBla, Mr Nours/Mjj,
+ Strider/Mjj, MoodST, Zorro 2 and Yogi.
+
+      Comments :
+      Menu code......................Zorro 2
+      Loader code....................Maartau/Zorro 2
+      Gfx............................Mister.A/Hylst
+      Fonts..........................ripped
+      Music..........................TomChi
+      NFO file.......................Senser/Typhoon
+      Scrolltexts....................Mr Nours/Strider/Zorro 2
+
+ Required configuration : Atari STF or STE with 1 Mo of memory.
+ 
+ Visit our website         : http://www.noextra-team.com/
+ Join the Force on FB here : https://www.facebook.com/groups/NoExtraTeam/

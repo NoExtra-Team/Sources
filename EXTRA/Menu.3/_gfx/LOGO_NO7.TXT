@@ -1,0 +1,4 @@
+;Palette of LOGO_NO7.PI1: Saved by NEOchrome V2.24 by Chaos, Inc.
+		dc.w	$0000,$07FF,$06EE,$0BDD,$0C66,$0566,$04DD,$0892
+		dc.w	$0F00,$0E77,$0355,$0677,$013B,$0DEE,$0777,$0FFF
+

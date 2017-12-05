@@ -1,0 +1,58 @@
+  ....  .................................................................  ....
+  :  :  :        __________________            __________________       :  :  :
+  :..:..:       \\                 \          \\                 \      :..:..:
+     :     ______\\________         \___ ______\\___________      \___     :
+  ...:    |               |             |                 /           |    :...
+  :       :               |             |                /            :       :
+  :       .               :             :               '             .       :
+  :      _/(____        _/(            _/(_______      _/(____        _/(____ .
+  .   __\\___   \_   __\\  \/\      __\\   ___   \____\\__    \_   __\\___   \_
+   __/      /    /__/      /  \_ __/       /     __/ ____/     /__/      /    /
+  \\_    _______/_\_     _/   _/_\        /      \_  \       _/_\_     __   _/__
+   /     \        /     __        \____  /       /    \__       /      /        \
+  /      /       /      /         /    \/       /      /       /      /    2o13 /
+_/      /      _/      /         /     /      _/      /      _/      /         /
+\_______       \______/_        /     /       \______/_      \______/_        /
+      /         /    /         / sns /         /    /         /    /         /
+  .   \_______e_\\   \_______x_\\    \_______t_\\   \_______r_\\   \_______a_\\
+  :...    .               ._____________.                _____________.    ....
+     :    |_____________n_|             |_____________o_//                 :   
+  ...:...                                                               ...:...
+  :  :  :          N     O           E     X     T     R     A          :  :  :
+  :..:  :...............................................................:  :..:
+
+
+                Compilation EXTRA >>Volume 9<< in 2017 By NoExtra
+
+
+          -=^=- The best compilation of unseen's Atari ST intro ? -=^=-
+
+
+   No  Name          Group     Title                               [STF|STE]
+   -------------------------------------------------------------------------
+   01  ACS_DEMO.PRG  A.C.S.    Intro Screen                        |Yes|No |
+   02  DMABALL.PRG   DMA       Speedball Cracktro                  |Yes|Yes|
+   03  FACTORY.PRG   FACTORY   Thunder Burner Cracktro             |Yes|Yes|
+   04  CHESS.PRG     FNT       Trial Chessplane Screen             |Yes|Yes|
+   05  BALLS.PRG     FIRE      Balls Screen                        |Yes|Yes|
+                     CRACKER                                       |Yes|Yes|
+   06  DEMO_MDF.PRG  FUSION    Power Off Screen                    |Yes|Yes|
+   07  GAMBLERS.PRG  GAMBLERS  Mega Swapp Intro                    |Yes|Yes|
+   08  MEGABUG.PRG   MEGABUB   Steve Davis World Snooker Cracktro  |Yes|Yes|
+   09  M3DEMO.PRG    NEXT      The MEGA 3D demo                    |No |Yes|
+   10  SOUNDOFF.PRG  OUCH!     Ultimate Musical Experience Menu    |No |Yes|
+       
+          Compatible emulators Steem, Steem SSE, Saint and Hatari.
+       
+             About :
+             Menu code......................Zorro 2
+             Loader code....................Maartau/Zorro 2
+             Gfx............................Mister.A
+             Fonts..........................ripped
+             ASCII Logo.....................Senser/Typhoon
+             Scrolltexts....................Zorro 2 and Dbug/Next
+       
+       Required configuration : Atari STF or STE with 512 ko of memory.
+ 
+ Visit our website         : http://www.noextra-team.com/
+ Join the Force on FB here : https://www.facebook.com/groups/NoExtraTeam/

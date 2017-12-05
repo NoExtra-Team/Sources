@@ -1,0 +1,61 @@
+   _/|\_     _/~\_     _/|       _   _     _/~\_     _/~\_    
+  /~ | *\ _ /~   *\ _ /~ |      /~ | *\ _ /~   *\ _ /~  __\   
+ /   |   \~/   |   \~/   |     /   |   \~/       \~/   |      
+|    |    V    |    V    |    |    |    V    |    V    |___   
+|    |    |    |    |    |    |    |    |    |    |     ___)  
+|    |    |    |    |    |____|    |    |    |    |    |____  
+|    |    |    |    |    |    )    |    |    |    |         )T
+|    |    A    |    A    |    A    |    A    |    A         /H
+ \       /~\       /~\       /~\       /~\   |   /~\       / R
+  \     /   \     /   \     /   \     /   \  |  /   \     /  E
+   \_ _/     \_ _/     \_ _/     \_ _/     \_|_/     \_ _/   E
+
+-=^=- The best compilation of unseen's Atari ST intro ? -=^=-
+
+No  Name          Coded by           Title
+-----------------------------------------------------------------------------
+01) DNTP.PRG      JEDI               DNT PAPER IV INTRO
+02) INTRO14.PRG   DRABOB & Co.       THAT'S THE WAY I LIKE IT INTRO
+03) PREVIEW.PRG   DRABOB & Co.       ACID DEMO
+04) RAYTRACE.PRG  JEDI & Co.         NOTHING IS MORE ABSTRACT DAN A DIMENSION
+05) SHOOT61.PRG   DRABOB             PREVIEW OF A GAME
+06) SO_LAME.PRG   JEDI               SO LAME INTRO
+07) TRACK.PRG     ???                MODULE PLAYED (Only STE!)
+08) ZOOMER.PRG    JEDI               ZOOMER IN GFA BASIC
+09) INT_CP1.PRG   PULSTAR            MENU INTROS
+10) MINES3.PRG    PULSTAR            MINEFIELD GAME
+11) AQABOOT.PRG   AQUARIUM           ANTIVIRUS
+
+No  Bonus         Coded by           Resume
+-----------------------------------------------------------------------------
+01) SCT_1.PRG     ODC                DISPLAY COLORED FRACTAL MAPS
+02) T_U_S_P.PRG   PULSTAR            THE ULTIMATE SOUNDCHIP PLAYER
+
+Comments :
+- Intro (07) made cold reset after...
+- Intro (04) crash after the end of the blue text...
+- Intros (04) & (08) & (09) re-assembled with small corrections...
+
+Menu code......................Zorro 2
+Loader code....................Maartau/Zorro 2
+Intro logo.....................Mister.A (Original font by SPS)
+Main Gfx.......................Mister.A
+Fonts..........................ripped
+Loader picture.................SPS
+Musics in the menu.............ANTICHRIST and JEDI ripped by Zorro 2 (original Megatizer format used !)
+Scrolltexts....................HELLO
+
+Require configuration : Atari STF or STE with 1 Mo of memory.
+
+  __/\________  __/\________ ___/|________________/\    /\_____      
+  \ o  ______/  \ /o        /\_/o_\__________   _   \  /o   _  \   
+  //    __)__   //         /  //   \     /o    |_|   \//   | |  \  
+ //          \ //    \/    \ //     \   //    _____  //    |_|   \ 
+/             /      /\     \/       \ //     |   / //      _     \
+\ ____________\ __ _________/\_______/ \ _____|   \_\ _____| |____/
+ \|            \|             \|        \|           \|    
+Compilation EXTRA >>Volume 3<< in 2012 By NoExtra.
+                   Visit our website : http://www.noextra-team.com/
+
+
+

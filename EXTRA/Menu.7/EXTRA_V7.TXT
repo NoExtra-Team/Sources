@@ -1,0 +1,57 @@
+  ....  .................................................................  ....
+  :  :  :        __________________            __________________       :  :  :
+  :..:..:       \\                 \          \\                 \      :..:..:
+     :     ______\\________         \___ ______\\___________      \___     :
+  ...:    |               |             |                 /           |    :...
+  :       :               |             |                /            :       :
+  :       .               :             :               '             .       :
+  :      _/(____        _/(            _/(_______      _/(____        _/(____ .
+  .   __\\___   \_   __\\  \/\      __\\   ___   \____\\__    \_   __\\___   \_
+   __/      /    /__/      /  \_ __/       /     __/ ____/     /__/      /    /
+  \\_    _______/_\_     _/   _/_\        /      \_  \       _/_\_     __   _/__
+   /     \        /     __        \____  /       /    \__       /      /        \
+  /      /       /      /         /    \/       /      /       /      /    2o13 /
+_/      /      _/      /         /     /      _/      /      _/      /         /
+\_______       \______/_        /     /       \______/_      \______/_        /
+      /         /    /         / sns /         /    /         /    /         /
+  .   \_______e_\\   \_______x_\\    \_______t_\\   \_______r_\\   \_______a_\\
+  :...    .               ._____________.                _____________.    ....
+     :    |_____________n_|             |_____________o_//                 :   
+  ...:...                                                               ...:...
+  :  :  :          N     O           E     X     T     R     A          :  :  :
+  :..:  :...............................................................:  :..:
+
+
+                Compilation EXTRA >>Volume 7<< in 2017 By NoExtra
+
+
+          -=^=- The best compilation of unseen's Atari ST intro ? -=^=-
+
+   No  Name          Coded by    Group     Title
+   ----------------------------------------------------------------
+   01  BONO    .PRG  BONO        TBC       BONO DEMO
+   02  FUZION_0.PRG  GFA         NOTHING   CD NUMBER 200 MENU
+   03  FUZION_1.PRG  KASAR       FUZION    CD NUMBER 6 MENU
+   04  GRODAN  .PRG  NICK        TCB       ONE-BIT-PLANE-MANIA -- STF
+   05  GUESTHMD.PRG  ZORRO 2     NOEXTRA   AMIGA 30TH BIRTDAY ANNIVERSARY
+   06  INTRO   .PRG  DBUG II     NEXT      ZE ANTI-MIT CONSPIRACIE -- STF
+   07  MCA_PHAL.PRG  RELAYER     AENIGMA   MCA PHALEON INTRO
+   08  PHALEON .PRG  MANIKIN     TLB       CANNIBALISTIC DETH ORGY SCREEN
+   09  SNYD_4  .PRG  AN COOL     TCB       SWEDISH DEMO SCREEN
+   10  TCBBALL .PRG  NIC         TCB       SPRITES RECORD
+
+Compatible emulators Steem, Steem SSE, Saint and Hatari.
+
+      About :
+      Menu code......................Zorro 2
+      Loader code....................Maartau/Zorro 2
+      Gfx............................Hylst
+      Fonts..........................ripped
+      Music..........................Jedi/Sector One
+      NFO file.......................Senser/Typhoon
+      Scrolltexts....................Sink/Orion/Zorro 2
+
+ Required configuration : Atari STF or STE with 512 ko of memory.
+ 
+ Visit our website         : http://www.noextra-team.com/
+ Join the Force on FB here : https://www.facebook.com/groups/NoExtraTeam/

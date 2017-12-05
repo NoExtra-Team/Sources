@@ -1,0 +1,4 @@
+;Palette of NOEXLSD2.PI1: Saved by NEOchrome V2.28 by Chaos, Inc.
+		dc.w	$0801,$098A,$0283,$0A8B,$0384,$0B8C,$0485,$0C8D
+		dc.w	$0586,$0D8E,$0687,$0801,$0801,$0801,$0801,$0777
+

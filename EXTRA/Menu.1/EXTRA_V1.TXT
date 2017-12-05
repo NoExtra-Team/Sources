@@ -1,0 +1,42 @@
+   _/|\_     _/~\_     _/|       _   _     _/~\_     _/~\_    
+  /~ | *\ _ /~   *\ _ /~ |      /~ | *\ _ /~   *\ _ /~  __\   
+ /   |   \~/   |   \~/   |     /   |   \~/       \~/   |      
+|    |    V    |    V    |    |    |    V    |    V    |___   
+|    |    |    |    |    |    |    |    |    |    |     ___)  
+|    |    |    |    |    |____|    |    |    |    |    |____  
+|    |    |    |    |    |    )    |    |    |    |         ) 
+|    |    A    |    A    |    A    |    A    |    A         / 
+ \       /~\       /~\       /~\       /~\   |   /~\       / O
+  \     /   \     /   \     /   \     /   \  |  /   \     /  N
+   \_ _/     \_ _/     \_ _/     \_ _/     \_|_/     \_ _/   E
+
+-=^=- The cooperation Tristar and Red Sector compilation -=^=-
+
+No Name         Game Name            Cracker    Intro by  Emulators
+-------------------------------------------------------------------
+1) TRSI00.PRG   DER PATRIZIER        METALLINOS TWILIGHT    Yes
+2) TRSI01.PRG   CARL LEWIS CHALLENGE METALLINOS MOONFALL    Yes
+3) TRSI02.PRG   STREET FIGHTER 2     METALLINOS TWILIGHT    Yes
+4) TRSI03.PRG   POPULOUS 2           METALLINOS MOONFALL    Yes
+5) TRSI04.PRG   CIVILISATION         METALLINOS MOONFALL    Yes
+6) TRSI05.PRG   CHAOS ENGINE         METALLINOS MOONFALL    Yes
+7) TRSI06.PRG   CIVILISATION         METALLINOS MOONFALL    Yes
+                (FIX FALCON)
+8) TRSI07.PRG   LEEDS UNITED         MOONFALL   MOONFALL    No
+                CHAMPIONSHIP
+9) TRSI08.PRG   TRANSARTICA          METALLINOS MOONFALL    Yes
+10)TRSI09.PRG   BONANZA BROTHERS     METALLINOS MOONFALL    Yes
+11)TRSI_STE.PRG SLEEPWALKER          TWILIGHT   TWILIGHT    Yes
+
+  __/\________  __/\________ ___/|________________/\    /\_____      
+  \ o  ______/  \ /o        /\_/o_\__________   _   \  /o   _  \   
+  //    __)__   //         /  //   \     /o    |_|   \//   | |  \  
+ //          \ //    \/    \ //     \   //    _____  //    |_|   \ 
+/             /      /\     \/       \ //     |   / //      _     \
+\ ____________\ __ _________/\_______/ \ _____|   \_\ _____| |____/
+ \|            \|             \|        \|           \|    
+Compilation EXTRA >>Volume 1<< in 2008 By NoExtra.
+                   Visit our website : http://www.noextra-team.com/
+
+
+

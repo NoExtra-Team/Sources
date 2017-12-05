@@ -1,0 +1,4 @@
+;Palette of LOADING.PI1: Saved by NEOchrome V2.28 by Chaos, Inc.
+		dc.w	$0FFF,$0DFD,$04DF,$0F00,$0000,$0000,$0000,$0000
+		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
+
