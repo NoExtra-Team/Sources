@@ -1,0 +1,4 @@
+;Palette of VIGNETTE.PI1: Saved by NEOchrome V2.28 by Chaos, Inc.
+		dc.w	$0000,$0004,$02AC,$0000,$0000,$0000,$0000,$0000
+		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0BBB
+
