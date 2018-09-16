@@ -1,0 +1,4 @@
+;Palette of 4133K.PI1: Saved by NEOchrome V2.28 by Chaos, Inc.
+		dc.w	$0081,$09A3,$0019,$03B4,$0FF7,$0A3B,$0FF7,$0B4C
+		dc.w	$04CC,$0C55,$05DD,$0D66,$06EE,$0E77,$0892,$012A
+

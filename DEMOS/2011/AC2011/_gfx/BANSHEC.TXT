@@ -1,0 +1,4 @@
+;Palette of BANSHEC.PI1: Saved by NEOchrome V2.28 by Chaos, Inc.
+		dc.w	$0000,$0310,$0222,$03BB,$02AA,$0111,$0420,$0332
+		dc.w	$0007,$0A33,$0666,$0750,$0530,$0119,$0750,$0199
+
