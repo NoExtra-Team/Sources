@@ -1,0 +1,23 @@
+' BIGFOOT 9-91
+' CONVERSION PI1-> 2PLANS CROTTES
+'
+'
+pi1$=SPACE$(32066)
+pi1%=V:pi1$
+BLOAD "D:\0_AL_\AL_17\gfa\COEUR.PI1",pi1%
+'
+lon%=16000+32
+buf$=SPACE$(lon%)
+buf%=V:buf$
+'
+REM - BMOVE pi1%+2,buf%,32    !palette
+'
+a%=pi1%+34
+b%=buf%+32
+FOR n=1 TO 32000/8
+  BMOVE a%,b%,4
+  ADD a%,8
+  ADD b%,4
+NEXT n
+'
+BSAVE "D:\0_AL_\AL_17\gfa\COEUR.DAT",buf%,lon%

@@ -1,15 +1,14 @@
 *************
-* AL_16.PRG *
+* AL_17.PRG *
 *************
 
 * // Intro Code version 0.31		// *
 * // Original code : Zorro 2/NoeXtra	// *
-* // 3d code       : Dracula/Positivity // *
 * // Gfx logo 	   : Mister.A/NoeXtra	// *
 * // Gfx font      : ripped		// *
-* // Music 	   : Rhino		// *
-* // Release date  : 09/11/2008		// *
-* // Update date   : 08/01/2009		// *
+* // Music 	   : Tomchi/NoeXtra // *
+* // Release date  : 13/06/2009		// *
+* // Update date   : 28/06/2009		// *
 
 **************************************************
 	OPT	c+	 ; Case sensitivity on.
@@ -78,9 +77,9 @@ MainLoop:
 
 * Put your code here !
 * >
-	* 3D part
-	bsr	efface_poly
-	bsr	draw_polygon
+	* Heart part
+	bsr	Move_1plan
+	bsr	Patch_1plan
 	* Texts part
 	bsr	put_texte
 	bsr	ScrollH
@@ -88,8 +87,8 @@ MainLoop:
 	move.l	Zorro_scr1,d0
 	move.l	Zorro_scr2,Zorro_scr1
 	move.l	d0,Zorro_scr2
-	lsr.w   #8,d0 
-	move.l  d0,$ffff8200.w
+	lsr.w     #8,d0 
+	move.l    d0,$ffff8200.w
 	* Accelerate and slow the cursor text
 	cmpi.b	#$4E,$FFFFFC02.w	*	keypad +
 	bne.s	.nextp
@@ -155,17 +154,6 @@ Vbl:
 
 	st	Vsync
 
-  move.l	a0,-(a7)
-  move.l	a1,-(a7)
-  LEA   Pal,A0 
-  MOVEA.L   #$FF8240,A1 
-  MOVE.L    (A0)+,(A1)+ 
-  MOVE.L    (A0)+,(A1)+ 
-  MOVE.L    (A0)+,(A1)+ 
-  MOVE.L    (A0)+,(A1)+ 
-  move.l	(a7)+,a1
-  move.l	(a7)+,a0
-  
       CLR.B     $FFFFFA1B.W 
       MOVE.B    #54,$FFFFFA21.W
       MOVE.L    #HBL,$120.W 
@@ -218,13 +206,12 @@ Init0:	movem.l	d0-d7/a0-a6,-(a7)
 
 	bsr	delay
 
-	* Precalc 
-	bsr	Genere_code
+	* Init Weaving Heart
+	bsr Init_1plan
 	* Inits for cursor text
 	bsr	Init_texte
 	* Precalc the little scroll down
 	bsr	Init_ScrollH
-	* No 3d inits : realtime used !
 
 	bsr	fadeoff
 
@@ -258,7 +245,6 @@ dep equ 160*6
 	move.l	(a0)+,(a2)+
 	dbf	d0,.aff
 
-HEIGHT equ 7999-7800+280
 POSITION equ 160*220
 
 	movea.l	Zorro_scr1,a1
@@ -266,7 +252,7 @@ POSITION equ 160*220
 	movea.l	Zorro_scr2,a2
 	adda.l	#POSITION,a2
 	movea.l	#Logo_NoeX,a0
-	move.l	#HEIGHT,d0
+	move.l	#160*12/4-1,d0
 .aff1:	move.l	(a0),(a1)+
 	move.l	(a0)+,(a2)+
 	dbf	d0,.aff1
@@ -361,7 +347,9 @@ Save_and_init_a_st:
 *                                                             *
 ***************************************************************
 
-Pal_Sprite:	dc.w	$0312,$0503,$0FFF,$0FFF,$0,$0,$0FFF,$0FFF
+Pal_Sprite:
+	dc.w	$0312,$0201,$0FFF,$0FFF,$0000,$0000,$0FFF,$0FFF,$0503,$0503
+	dc.w	$0FFF,$0FFF,$0000,$0000,$0FFF,$0FFF,$0,$0,$0,$0
 
 HBL:  MOVE.B    #$FF,$FFFF8240.W * blanc
       CLR.B     $FFFFFA1B.W 
@@ -397,6 +385,10 @@ HBL_debut:CLR.B     $FFFFFA1B.W
   move.l	a1,-(a7)
   LEA   Pal_Sprite,A0 
   MOVEA.L   #$FF8240,A1 
+  MOVE.L    (A0)+,(A1)+ 
+  MOVE.L    (A0)+,(A1)+ 
+  MOVE.L    (A0)+,(A1)+ 
+  MOVE.L    (A0)+,(A1)+
   MOVE.L    (A0)+,(A1)+ 
   MOVE.L    (A0)+,(A1)+ 
   MOVE.L    (A0)+,(A1)+ 
@@ -451,6 +443,9 @@ HBL_finale:CLR.B     $FFFFFA1B.W
   MOVE.L    (A0)+,(A1)+ 
   MOVE.L    (A0)+,(A1)+ 
   MOVE.L    (A0)+,(A1)+ 
+  MOVE.L    (A0)+,(A1)+ 
+  MOVE.L    (A0)+,(A1)+ 
+  MOVE.L    (A0)+,(A1)+ 
   move.l	(a7)+,a1
   move.l	(a7)+,a0
   
@@ -477,8 +472,22 @@ hblFin:CLR.B     $FFFFFA1B.W
       RTE 
 
 hblfin:
-      BCLR      #0,$FFFFFA0F.W
-      RTE
+  move.l	a0,-(a7)
+  move.l	a1,-(a7)
+  LEA   Pal,A0 
+  MOVEA.L   #$FF8240,A1 
+  MOVE.L    (A0)+,(A1)+ 
+  MOVE.L    (A0)+,(A1)+ 
+  MOVE.L    (A0)+,(A1)+ 
+  MOVE.L    (A0)+,(A1)+ 
+  MOVE.L    (A0)+,(A1)+ 
+  MOVE.L    (A0)+,(A1)+ 
+  MOVE.L    (A0)+,(A1)+ 
+  MOVE.L    (A0)+,(A1)+ 
+  move.l	(a7)+,a1
+  move.l	(a7)+,a0
+	bclr      #0,$fffffa0f.w
+	rte
 
 	ENDC
 	
@@ -738,7 +747,8 @@ clear_screen:
 		movem.l	d0-d7/a0-a6,-(a7)
 		moveq #PATTERN,d0
 		move #1999,d1
-.cls		move.l d0,(a0)+
+.cls:
+		move.l d0,(a0)+
 		move.l d0,(a0)+
 		move.l d0,(a0)+
 		move.l d0,(a0)+
@@ -752,14 +762,13 @@ clear_screen:
 *      Display + clear Fx done by Zorro 2      *
 *           Special font by Mister.A           *
 ************************************************
-pos_obj	equ	(160*70)+8*6
+pos_obj	equ	(160*70)+8*3
 retour_obj equ (160*11-(8*13))
 vitesse_compt	equ	4	; 2 for speedy
 POSH equ 160*70
 POSB equ 160*129
 
-Init_texte:
-           move.w 	#vitesse_compt,cmpt_vbl	* init compteur VBL pour texte
+Init_texte:move.w 	#vitesse_compt,cmpt_vbl	* init compteur VBL pour texte
            move.l 	#ptexte-1,ptr
            clr.w 	anim
            move.w	#pos_obj,adr_obj
@@ -891,8 +900,7 @@ moins:     move.w 	#2,cmpt_vbl
 
 NB_LIGNE_CLS equ 64
 
-CLS_TEXTE:
-           move.w	tempoL,d7
+CLS_TEXTE: move.w	tempoL,d7
            cmp.w	#TEMPO,d7
            bne.s	.end
            move.w	totalL,d7
@@ -907,10 +915,9 @@ CLS_TEXTE:
            RTS 
 
 LONGEUR_CLS equ 13
-POSITION_CLS equ 48
+POSITION_CLS equ 48-8*3
 
-EFF_TEXTE:
-           add.w	#1,d7
+EFF_TEXTE: add.w	#1,d7
            move.w	d7,totalL
            move.l posHscr1,a3
            move.l posBscr1,a4
@@ -940,127 +947,79 @@ i set i+8
            RTS
 
 ************************************************
-*               3D from XMAS 93                *
-*                STF code used                 *
-*             Dracula/Positivity               *
-*           Modifications by Zorro 2           *
-*            Star design by Juliane :)         *
+*       HardScrolling 2 plans + wave           *
+*             from BigFoot/Mjj                 *
+*         Cleaning code by Maartau             *
+*            Modified by Zorro 2               *
 ************************************************
-nb_coord equ $4 ; <-- pas touche !!!
-nb_solide equ $5 ; Une étoile à cinq branches
+y_BAS equ 200
 
-draw_polygon:
-  move.w	alpha,d0
-  addq.w	#$4,d0	; Incrementer l' angle.
-  cmp.w	#$200,d0	; alpha=512?
-  bne	.alpha_ok
-  moveq.l	#$0,d0	; Alors c' est equivalent a 0.
-.alpha_ok:
-  move.w	d0,alpha
-  move.l	#sin_cos,a0
-  add.w	d0,d0	; 1 sinus=1 mot.
-  move.w	(a0,d0.w),d1	; d1=sin(alpha).
-  add.w	#$100,a0
-  move.w	(a0,d0.w),d0	; d0=cos(alpha).
-
-  * position du solide par d‚faut
-  move.w	#85,d6	; d6=incx.
-  move.w	#85,d7	; d7=incy.
-  
-  move.l	#coords,a0
-  move.l	#new_coords,a1
-
-  rept	(nb_coord*nb_solide)
-  move.w	(a0)+,d2	; d2=x.
-  move.w	(a0)+,d3	; d3=y.
-  move.w	d2,d4
-  move.w	d3,d5
-  muls.w	d0,d2	; d2=x*cos.
-  add.l	d2,d2
-  add.l	d2,d2
-  swap.w	d2
-  muls.w	d1,d4	; d4=x*sin.
-  add.l	d4,d4
-  add.l	d4,d4
-  swap.w	d4
-  muls.w	d0,d3	; d3=y*cos.
-  add.l	d3,d3
-  add.l	d3,d3
-  swap.w	d3
-  muls.w	d1,d5	; d5=y*sin.
-  add.l	d5,d5
-  add.l	d5,d5
-  swap.w	d5
-  sub.w	d5,d2	; d2=x*cos-y*sin.
-  add.w	d4,d3	; d3=x*sin+y*cos.
-  add.w	d6,d2	; d2=d2+incx.
-  add.w	d7,d3	; d3=d3+incy.
-  move.w	d2,(a1)+
-  move.w	d3,(a1)+
-  endr
-
-  move.l	Zorro_scr1,a0	
-  lea	160*57(a0),a0
-  move.l	#new_coords+(16*0),a1
-  moveq.l	#nb_coord,d0
-  jsr	polygone	; Affichage du premier triangle.
-
-  move.l	#new_coords+(16*1),a1
-  moveq.l	#nb_coord,d0	; Affichage du second triangle.
-  jsr	polygone
-
-  move.l	#new_coords+(16*2),a1
-  moveq.l	#nb_coord,d0	; Affichage du troisieme triangle.
-  jsr	polygone
-
-  move.l	#new_coords+(16*3),a1
-  moveq.l	#nb_coord,d0	; Affichage du quatrieme triangle.
-  jsr	polygone
-
-  move.l	#new_coords+(16*4),a1
-  moveq.l	#nb_coord,d0	; Affichage du cinquieme triangle.
-  jsr	polygone
+Init_1plan:
+	move.l	#wave_st,wavepnt
 	rts
 
-polygone:
- include "POLYGONE.ASM"
-
-***************************************************
-* Génération du bloc d'effacement 1 plan de la 3D *
-***************************************************
-NB_LIGNE_GENERE	equ	169
-NB_BLOC_SUPP	equ	10
-PLAN_CLS	equ	0
-
-efface_poly:
-	move.l	Zorro_scr1,a0
-	lea 160*57(a0),a0
-	moveq	#0,d0
-	jsr Code_gen
-	RTS 
+Patch_1plan:
+	move.l Zorro_scr1,a0
+	lea	160*200(a0),a0
+	lea	160*15(a0),a0
+	rept 40*4
+	clr.l (a0)+
+	endr
+	rts
 	
-* Clear last plane of screen - reasonably quickly...
-Genere_code:
-	lea Code_gen,a0
-	move.w	#NB_LIGNE_GENERE,d7
-	moveq	#0,d4
-Genere_pour_toutes_les_lignes:	
-	moveq	#NB_BLOC_SUPP,d6
-	move.w	d4,d5
-	add.w	#PLAN_CLS,d5 * position du cadre
-Genere_une_ligne:
-	move.w	#$3140,(a0)+		 * Genere un move.w  d0,$xx(a0)
-	move.w	d5,(a0)+				 * et voila l'offset $xx
-	addq.w	#8,d5            * pixel suivant
-	dbra	d6,Genere_une_ligne
-	add.w	#160,d4            * ligne suivante
-	dbra	d7,Genere_pour_toutes_les_lignes
-	move.w	#$4e75,(a0)			 * Et un RTS !!
+Move_1plan:
+	addq.l	#2,wavepnt
+	cmpi.l	#wave_end,wavepnt
+	blt.s	.ok
+	move.l	#wave_st,wavepnt
+
+.ok	movea.l	wavepnt,a0
+	move.w	(a0),d0
+	sub.w	d0,y
+
+	tst.w	y
+	bpl.s	.ok1
+	addi.w	#y_BAS,y
+
+.ok1	cmpi.w	#y_BAS,y
+	blt.s	.ok2
+	subi.w	#y_BAS,y
+.ok2	lea	bground+32(pc),a0
+	movea.l	Zorro_scr1,a1
+	lea	((160*57)-2)(a1),a1
+	move.w	y,d0
+	mulu	#80,d0
+	lea	0(a0,d0.w),a0
+
+	move.w	#y_BAS,d7
+	sub.w	y,d7
+	bra.s	linedbf
+
+line
+_ofs	SET	0
+	REPT	20
+	move.l	(a0)+,_ofs(a1)
+_ofs	SET	_ofs+8
+	ENDR
+	lea	160(a1),a1
+linedbf	dbf	d7,line
+
+	lea	bground+32(pc),a0
+	move.w	y,d7
+	bra.s	lin2dbf
+
+line2
+_ofs	SET	0
+	REPT	20
+	move.l	(a0)+,_ofs(a1)
+_ofs	SET	_ofs+8
+	ENDR
+	lea	160(a1),a1
+lin2dbf	dbf	d7,line2
 	rts
 
 ************************************************
 *            Scrolling 12*12 1 plan            *
-*                 from Atomus                  *
 ************************************************
 Init_ScrollH:
       BSR       PRETEXT 
@@ -1073,7 +1032,7 @@ ScrollH:
       ADDA.W    LIGNE(PC),A1
       MOVEA.L   Zorro_scr1,A2
       LEA       160*200(A2),A2
-      LEA       (160*38)+6(A2),A2
+      LEA       (160*38)+2(A2),A2
       MOVEQ     #20-1,D2 
       MOVE.W    (A0)+,D0
       LEA       16(A1,D0.W),A3
@@ -1081,28 +1040,28 @@ ScrollH:
       LEA       0(A1,D0.W),A5 
       MOVE.W    (A3)+,D1
       OR.W      (A5)+,D1
-      MOVE.W    D1,160*0(A2) 
+      MOVE.W    D1,(A2) 
       MOVE.W    (A3)+,D1
       OR.W      (A5)+,D1
-      MOVE.W    D1,160*1(A2)
+      MOVE.W    D1,160(A2)
       MOVE.W    (A3)+,D1
       OR.W      (A5)+,D1
-      MOVE.W    D1,160*2(A2)
+      MOVE.W    D1,320(A2)
       MOVE.W    (A3)+,D1
       OR.W      (A5)+,D1
-      MOVE.W    D1,160*3(A2)
+      MOVE.W    D1,480(A2)
       MOVE.W    (A3)+,D1
       OR.W      (A5)+,D1
-      MOVE.W    D1,160*4(A2)
+      MOVE.W    D1,640(A2)
       MOVE.W    (A3)+,D1
       OR.W      (A5)+,D1
-      MOVE.W    D1,160*5(A2)
+      MOVE.W    D1,800(A2)
       MOVE.W    (A3)+,D1
       OR.W      (A5)+,D1
-      MOVE.W    D1,160*6(A2)
+      MOVE.W    D1,960(A2)
       MOVE.W    (A3)+,D1
       OR.W      (A5)+,D1
-      MOVE.W    D1,160*7(A2) 
+      MOVE.W    D1,1120(A2) 
       MOVEA.L   A5,A3 
       ADDQ.W    #8,A2 
       DBF       D2,.loop
@@ -1157,7 +1116,7 @@ PRESHIFT:LEA       FONT(PC),A0
       CLR.W     (A1)+ 
       DBF       D0,.loop
       MOVE.W    #$2FC,D0
-.gener:MOVE.W    (A0),D1 
+.loopa:MOVE.W    (A0),D1 
 	rept 7
       SWAP      D1
       MOVE.W    16(A0),D1 
@@ -1177,7 +1136,7 @@ PRESHIFT:LEA       FONT(PC),A0
       ADDQ.W    #2,A0 
       LEA       16(A0),A0 
       LEA       16(A1),A1 
-      DBF       D0,.gener
+      DBF       D0,.loopa
       RTS 
       
 ******************************************************************
@@ -1197,10 +1156,10 @@ Pal:
 * Each line have 40 characters in default !
 NOMBRE_DE_LIGNE equ 6	*	Number of line to display in the scrolltext
 NOMBRE_DE_CARACTERE_PAR_LIGNE equ 40 * Number of character into the line of the scrolltext
-
 PAS:
 	DC.L	BUFFER
 TEXTH:
+
 		  DC.B      '                                        '
 		  DC.B      '                    ABCDEFGHIJKLMOPQRSTU'
 		  DC.B      'VWXYZ .,!?()/      ',$27,'0123456789          '
@@ -1218,7 +1177,8 @@ BUFFER:
 ENDLINE:
 	DCB.L	NOMBRE_DE_CARACTERE_PAR_LIGNE,$0
 LIGNE:
-	DC.W	0 
+	DC.W	$0 
+
 FONT:
 	dc.w	$0000,$0000,$0000,$0000
 	dc.w	$0000,$0000,$0000,$0000
@@ -1323,22 +1283,23 @@ FONT:
 	dc.w	$0000,$0000,$0000,$0000
 	dc.w	$0000,$0000,$0000,$0000
 BIGBUF:
-	DCB.W	13056,$0 
+	DCB.W	13056,0 
 	EVEN
 ; <- 
 
 ;-> Données texte 8*8
 font	
-	incbin 	"FONT88F.DAT"
+	incbin 	"font88f.DAT"
 	even
-cmpt_vbl   dc.w 2
-clsL	     dc.w	0
-totalL	   dc.w	0
-posHscr1	 dc.l	0
-posBscr1	 dc.l	0
-posHscr2	 dc.l	0
-posBscr2	 dc.l	0
-tempoL	   dc.w	0
+
+cmpt_vbl   dc.w $2
+clsL	     dc.w	$0
+totalL	   dc.w	$0
+posHscr1	 dc.l	$0
+posBscr1	 dc.l	$0
+posHscr2	 dc.l	$0
+posBscr2	 dc.l	$0
+tempoL	   dc.w	$0
 ptexte:
 * Character ASCII only !
 *-> !'#$%&"()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyzCUR<-*
@@ -1352,7 +1313,7 @@ ptexte:
 	   dc.b "the Atari ST crew NOEXTRA.",$ff
 	   dc.b "Code...............ZORRO 2",$ff
 	   dc.b "Gfx...............MISTER.A",$ff
-	   dc.b "Music................RHINO",$ff
+	   dc.b "Music...............TOMCHI",$ff
 	   dc.b "                          ",$ff
 	   dc.b "NOEXTRA (C)PRODUCTION 2009",$fe
 
@@ -1387,37 +1348,15 @@ ptexte:
 		 even
 ; <-
 
-; -> Données 3D
-sin_cos:
-  incbin	"SIN_COS.DAT"
-	even
-alpha:
+; -> Données Coeur
+y:
 	dc.w	0
-coords:
-  dc.w	0,0    ; face 1
-  dc.w	-25,35
-  dc.w	0,84
-  dc.w	25,35
-
-	dc.w	0,0    ; face 2
-	dc.w	-40,-15
-	dc.w	-80,25
-	dc.w	-25,35
-	
-	dc.w	0,0    ; face 3
-	dc.w	0,-40
-	dc.w	-50,-65
-	dc.w	-40,-15
-
-	dc.w	0,0    ; face 4
-	dc.w	40,-15
-	dc.w	50,-65
-	dc.w	0,-40
-
-	dc.w	0,0    ; face 5
-	dc.w	25,35
-	dc.w	80,25
-	dc.w	40,-15
+bground:
+	incbin	"COEUR.dat"
+wave_st:
+	incbin	"crackywv.dat"
+wave_end:
+	even
 * <-
 
 Logo_Al:
@@ -1853,7 +1792,8 @@ Logo_Al:
 		dc.w	$FFFF,$0000,$FFFF,$FFFF,$FFFE,$0000,$FFFE,$FFFE
 
 Pal_NoeX:
-	dc.w      $0100,$0503,$0036,$0677,$0525,$0fff,$0fff,$0fff
+		dc.w    $0100,$0100,$0677,$0677,$0036,$0000,$0525,$0000
+		dc.w    $0100,$0100,$0677,$0677,$00F0,$00F0,$00F0,$00f0
 
 Logo_NoeX:
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
@@ -1864,8 +1804,8 @@ Logo_NoeX:
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
-		dc.w	$0000,$07FF,$0000,$0000,$0000,$FFFF,$0000,$0000
-		dc.w	$0000,$FC00,$03FF,$0000,$0000,$0000,$FFFF,$0000
+		dc.w	$07FF,$0000,$07FF,$0000,$FFFF,$0000,$FFFF,$0000
+		dc.w	$FFFF,$03FF,$FFFF,$0000,$FFFF,$FFFF,$FFFF,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
@@ -1874,8 +1814,8 @@ Logo_NoeX:
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
-		dc.w	$0000,$07FF,$0000,$0000,$0000,$FFFF,$0000,$0000
-		dc.w	$0000,$FC00,$03FF,$0000,$0000,$0000,$FFFF,$0000
+		dc.w	$07FF,$0000,$07FF,$0000,$FFFF,$0000,$FFFF,$0000
+		dc.w	$FFFF,$03FF,$FFFF,$0000,$FFFF,$FFFF,$FFFF,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
@@ -1884,8 +1824,8 @@ Logo_NoeX:
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
-		dc.w	$0000,$07FF,$0000,$0000,$F801,$FFFF,$0000,$0000
-		dc.w	$DC01,$FC01,$03FE,$0000,$F800,$F800,$07FF,$0000
+		dc.w	$07FF,$0000,$07FF,$0000,$FFFF,$F801,$07FE,$0000
+		dc.w	$FFFF,$DFFF,$23FE,$0000,$FFFF,$FFFF,$07FF,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
@@ -1894,8 +1834,8 @@ Logo_NoeX:
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
-		dc.w	$00F9,$07FF,$0000,$0000,$DCFD,$FFFF,$0000,$0000
-		dc.w	$DDFD,$FDFD,$0202,$0000,$DCF8,$DCF8,$2307,$0000
+		dc.w	$07FF,$00F9,$0706,$0000,$FFFF,$DCFD,$2302,$0000
+		dc.w	$FFFF,$DFFF,$2202,$0000,$FFFF,$FFFF,$2307,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
@@ -1904,8 +1844,8 @@ Logo_NoeX:
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
-		dc.w	$01DD,$07FF,$0000,$0000,$DDC1,$FFFF,$0000,$0000
-		dc.w	$DC71,$FC71,$038E,$0000,$DDDC,$DDDC,$2223,$0000
+		dc.w	$07FF,$01DD,$0622,$0000,$FFFF,$DDC1,$223E,$0000
+		dc.w	$FFFF,$DFFF,$238E,$0000,$FFFF,$FFFF,$2223,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
@@ -1914,8 +1854,8 @@ Logo_NoeX:
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
-		dc.w	$01DD,$07FF,$0000,$0000,$DDC0,$FFFF,$0000,$0000
-		dc.w	$F871,$FC71,$038E,$0000,$F9DC,$F9DC,$0623,$0000
+		dc.w	$07FF,$01DD,$0622,$0000,$FFFF,$DDC0,$223F,$0000
+		dc.w	$FFFF,$FBFF,$078E,$0000,$FFFF,$FFFF,$0623,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
@@ -1924,8 +1864,8 @@ Logo_NoeX:
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
-		dc.w	$01DD,$07FF,$0000,$0000,$DDF1,$FFFF,$0000,$0000
-		dc.w	$DC71,$FC71,$038E,$0000,$DDFC,$DDFC,$2203,$0000
+		dc.w	$07FF,$01DD,$0622,$0000,$FFFF,$DDF1,$220E,$0000
+		dc.w	$FFFF,$DFFF,$238E,$0000,$FFFF,$FFFF,$2203,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
@@ -1934,8 +1874,8 @@ Logo_NoeX:
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
-		dc.w	$01DD,$07FF,$0000,$0000,$DDC1,$FFFF,$0000,$0000
-		dc.w	$DC71,$FC71,$038E,$0000,$DDDC,$DDDC,$2223,$0000
+		dc.w	$07FF,$01DD,$0622,$0000,$FFFF,$DDC1,$223E,$0000
+		dc.w	$FFFF,$DFFF,$238E,$0000,$FFFF,$FFFF,$2223,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
@@ -1944,8 +1884,8 @@ Logo_NoeX:
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
-		dc.w	$01DC,$07FF,$0000,$0000,$F9C1,$FFFF,$0000,$0000
-		dc.w	$DC71,$FC71,$038E,$0000,$DDDC,$DDDC,$2223,$0000
+		dc.w	$07FF,$01DC,$0623,$0000,$FFFF,$F9C1,$063E,$0000
+		dc.w	$FFFF,$DFFF,$238E,$0000,$FFFF,$FFFF,$2223,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
@@ -1954,8 +1894,8 @@ Logo_NoeX:
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
-		dc.w	$01DC,$07FF,$0000,$0000,$00FC,$FFFF,$0000,$0000
-		dc.w	$0070,$FC70,$038F,$0000,$01DC,$01DC,$FE23,$0000
+		dc.w	$07FF,$01DC,$0623,$0000,$FFFF,$00FC,$FF03,$0000
+		dc.w	$FFFF,$03FF,$FF8F,$0000,$FFFF,$FFFF,$FE23,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
@@ -1964,8 +1904,8 @@ Logo_NoeX:
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
-		dc.w	$0000,$07FF,$0000,$0000,$0000,$FFFF,$0000,$0000
-		dc.w	$0000,$FC00,$03FF,$0000,$0000,$0000,$FFFF,$0000
+		dc.w	$07FF,$0000,$07FF,$0000,$FFFF,$0000,$FFFF,$0000
+		dc.w	$FFFF,$03FF,$FFFF,$0000,$FFFF,$FFFF,$FFFF,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
@@ -1974,18 +1914,18 @@ Logo_NoeX:
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 		dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
-		dc.w	$0000,$07FF,$0000,$0000,$0000,$FFFF,$0000,$0000
-		dc.w	$0000,$FC00,$03FF,$0000,$0000,$0000,$FFFF,$0000
-		dc.w	$FFFF,$0000,$FFFF,$0000,$FFFF,$0000,$FFFF,$0000
-		dc.w	$FFFF,$0000,$FFFF,$0000,$FFFF,$0000,$FFFF,$0000
-		dc.w	$FFFF,$0000,$FFFF,$0000,$FFFF,$0000,$FFFF,$0000
-		dc.w	$FFFF,$0000,$FFFF,$0000,$FFFF,$0000,$FFFF,$0000
-		dc.w	$FFFF,$0000,$FFFF,$0000,$FFFF,$0000,$FFFF,$0000
-		dc.w	$FFFF,$0000,$FFFF,$0000,$FFFF,$0000,$FFFF,$0000
-		dc.w	$FFFF,$0000,$FFFF,$0000,$FFFF,$0000,$FFFF,$0000
-		dc.w	$FFFF,$0000,$FFFF,$0000,$FFFF,$0000,$FFFF,$0000
-		dc.w	$FFFF,$0000,$FFFF,$0000,$FFFF,$0000,$FFFF,$0000
-		dc.w	$FFFF,$0000,$FFFF,$0000,$FFFF,$0000,$FFFF,$0000
+		dc.w	$07FF,$0000,$07FF,$0000,$FFFF,$0000,$FFFF,$0000
+		dc.w	$FFFF,$03FF,$FFFF,$0000,$FFFF,$FFFF,$FFFF,$0000
+		dc.w	$FFFF,$0000,$0000,$0000,$FFFF,$0000,$0000,$0000
+		dc.w	$FFFF,$0000,$0000,$0000,$FFFF,$0000,$0000,$0000
+		dc.w	$FFFF,$0000,$0000,$0000,$FFFF,$0000,$0000,$0000
+		dc.w	$FFFF,$0000,$0000,$0000,$FFFF,$0000,$0000,$0000
+		dc.w	$FFFF,$0000,$0000,$0000,$FFFF,$0000,$0000,$0000
+		dc.w	$FFFF,$0000,$0000,$0000,$FFFF,$0000,$0000,$0000
+		dc.w	$FFFF,$0000,$0000,$0000,$FFFF,$0000,$0000,$0000
+		dc.w	$FFFF,$0000,$0000,$0000,$FFFF,$0000,$0000,$0000
+		dc.w	$FFFF,$0000,$0000,$0000,$FFFF,$0000,$0000,$0000
+		dc.w	$FFFF,$0000,$0000,$0000,$FFFF,$0000,$0000,$0000
 ; <-
 
 PalNoeXtra:
@@ -2365,7 +2305,7 @@ LogoNoeXtra:
 		dc.w	$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF,$FFFF	
 		
 MUSIC: 		; Not compressed please !
-	incbin	*.snd
+	incbin	*.thk
 	even
 
 ******************************************************************
@@ -2376,17 +2316,12 @@ bss_start:
 
 * Full data here :
 * >
-Code_gen:         ds.w	(2*NB_BLOC_SUPP)*NB_LIGNE_GENERE		* Place pour le code genere
-									   									* pour l'effacement de l'elt 3d
-								  ds.w	1							* Place pour le rts
-rien            	ds.b	10000
-
 ptr	       ds.l 1
 vitesse	   ds.w 1
 anim       ds.w 1
 adr_obj    ds.l 1
-new_coords:ds.w	5*4
-aucasou:   ds.w	100
+
+wavepnt	ds.l	1
 * <
 
 Vsync:	ds.b	1

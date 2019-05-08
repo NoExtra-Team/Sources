@@ -1,0 +1,24 @@
+' BIGFOOT 9-91
+' CROTTES 2PLANS: VAGUES Y
+'
+'
+lon%=90*2
+buf$=SPACE$(lon%)
+buf%=V:buf$
+ptr%=buf%
+'
+'
+oldy=ROUND(80+40*COSQ(0*4+6)+40*SINQ(0*4*2)+n/2)
+FOR n=1 TO 90
+  y=ROUND(80+40*COSQ(n*4+6)+40*SINQ(n*4*2)+n/2)
+  dif&=y-oldy
+  BMOVE V:dif&,ptr%,2
+  ADD ptr%,2
+  PLOT n,y
+  oldy=y
+NEXT n
+'
+BSAVE "D:\0_AL_\AL_17\CRACKYWV.DAT",buf%,lon%
+'
+EDIT
+'
