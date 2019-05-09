@@ -1,0 +1,17 @@
+What I change since the last version :
+* Management of Timer B (include bottom overscan)
+* Management of two screens
+* Management of palette
+* Moving effects in 40 pixels down
+* Seeing Vbl or Not
+* Optimizing source code
+* Changing compilation option
+* Adding AL logo by Mister.A/NoEx
+* Adding Fade out
+
+Rest :
+* Testing on Falcon
+* Changing Muzax
+* ...
+
+										Zorro 2/NoEx in 24/09/2006
