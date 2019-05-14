@@ -1,0 +1,27 @@
+Hello Marcer,
+
+Another release for AL !
+
+I optimize this version with Jedi 
+muzaxx, I sorry about that ! :-(
+But I noticed that I've the same pbl 
+with another intros and effects !!!
+
+I'm waiting the "feu vert" from Mister A 
+for his last version of the gfx, I think 
+that's a good idea to wait for ?
+
+About AL_11.prg, another - maybe - release 
+for AL, Marteau give me the source and I 
+see with him to use for AL intro ? I manage 
+a lot of changing and finality, Atomus talk 
+to me about STF conversion, the asm routs 
+need some big modifications. I admit that 
+my overscan need some "regulations" ;)
+This intro works only on Steem...
+
+A++
+FrEd!
+						aka Zorro2/NoExtra
+						
+						25/09/2006
