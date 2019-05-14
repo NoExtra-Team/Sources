@@ -1,0 +1,26 @@
+Salut Bruno,
+
+Voici la 1ere intro que je t'ai faite y'a un petit moment pour Masque+, je te l'ai remis a niveau
+avec une version plus stable et mieux debuggee... et voir un peu plus claire dans le listing !!!
+
+Voici ce que tu as en plus :
+- variable SEEMYVBL permet de voir le tps machine (necessaire qd tu tests des mods), a mettre a 1 pour ne rien voir !
+- Flash blanc en intro si STE
+- Logo AL de Mister.A
+- Tu as 2 versions (2 chips & 2 modules differents testees sur STF/E)
+
+Rien ne t'empeche de t'amuser a mettre d'autres fichiers musicaux, mais la routine de replay tourne 
+a 12.5 Khz. J'utiliserai celui des WizzCat la prochaine, moins nasiarde au replay mais plante sur pas mal 
+de mods.
+
+Je t'ai mis l'ai gfxs utilises si tu veux les recuperer pour d'autres intros.
+
+Le rep. binaire contient les PRG.
+
+Amuse toi bien !
+
+A+
+FrEd! aka Zorro 2
+
+30/01/2006
+
