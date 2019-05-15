@@ -1,0 +1,35 @@
+Salut Bruno,
+
+Voici enfin l'intro tant attendu, j'ai tres peu de temps 
+en ce moment car je n'arrete pas d'etre solicite pour un 
+job actuellement.
+J'attends tjs un retour de mister d.m mais bon j'ai passe 
+outre ses tests et j'ai fini de debugger la chose.
+Essaye d'indiquer dans le texte que je suis devenu codeur 
+pour le groupe, je voulai placer l'info mais il me manque 
+encore du tps et David bosse pas mal en ce moment...
+
+On laisse le code tel qu'il est pour le moment, si tu veux 
+pas de modules, je te referai une version "plus" standard.
+Je joins aussi les derniers gfxs...
+
+Petits rappels :
+---------------
+SEEMACHINE	equ	1 ;	0 = texte & 1 = rien
+* la var permet d'afficher quelle machine est utilisee
+SEEMYVBL	equ	1 ;	0 = see cpu & 1 = nothing
+* permet de voir la VBL en appuyant sur la touche ALT
+=>Bien sur ses 2 vars sont inhibees en les mettant a "1".
+Pour le texte (label TEXTE ligne 1241), tu peux mettre 20 
+lignes au total de 30 caracteres maximum.
+Si tu joues un autre soundchip, enleve le commentaire de 
+la ligne 126 du code histoire que cela ne fasse pas de reset 
+a la fin ?!?
+Je te joins en meme le code source reutilisable pour le logo 
+3D qui n'est pas documente mais attention, la routine 
+d'effacement des lignes a ete optimise sur le code de l'intro 
+histoire de grapiller de la vbl...
+
+Voila !
+
+Zorro 2/NoExtra aka Freddo - 15/03/2006
