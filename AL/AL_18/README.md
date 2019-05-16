@@ -1,2 +1,2 @@
 AL intro number 18
-ASM Sources from NoExtra-Team on ATARI ST
+ASM Sources from Hemoroids / NoExtra-Team on ATARI ST
