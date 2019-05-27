@@ -1258,10 +1258,10 @@ bss_start:
 mul_tab:
 	ds.w 200
 
-Code_gen:         ds.w	(2*NB_BLOC_SUPP)*NB_LIGNE_GENERE		* Place pour le code genere
-									   									* pour l'effacement de l'elt 3d
-								  ds.w	1							* Place pour le rts
-rien            	ds.b	10000
+Code_gen:	ds.w	(2*NB_BLOC_SUPP)*NB_LIGNE_GENERE		* Place pour le code genere
+					   									* pour l'effacement de l'elt 3d
+					ds.w	1							* Place pour le rts
+rien:     ds.b	10000
 
 x_curs:
 	ds.l 1
