@@ -394,6 +394,8 @@ Save_and_init_st:
 	bsr	INPUT_TRACE_ERROR            ; Save vectors list
  ENDC
 
+* -//---- >
+* Don't clear the $fffffa07.w if you used the $466.w in the fadin routs with TOS 2.06
 	;clr.b $fffffa07.w                ; Interrupt enable A (Timer-A & B)
 	;clr.b $fffffa09.w                ; Interrupt enable B (Timer-C & D)
 	;clr.b $fffffa13.w                ; Interrupt mask A (Timer-A & B)
@@ -402,6 +404,7 @@ Save_and_init_st:
 	;clr.b $fffffa1b.w                ; Stop Timer B
 	;clr.b $fffffa21.w                ; Timer B data at zero
 	;clr.b $fffffa1d.w                ; Stop Timer C & D
+* -//---- <
 
  IFEQ	BOTTOM_BORDER
 	sf $fffffa21.w                   ; Timer B data (number of scanlines to next interrupt)
