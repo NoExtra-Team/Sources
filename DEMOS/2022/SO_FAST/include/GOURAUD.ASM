@@ -1,0 +1,1053 @@
+; *************************************************************************
+; ***                  GOURAUD SHADED - 3 BITPLANES                     ***
+; *************************************************************************
+; ***                          ATOMUS/NOEXTRA                           ***
+; *************************************************************************
+GENERE:LEA       CODE_GENERE,A0
+      MOVE.W    #514/4-1,D0 
+.LOOP:MOVE.L    #$D48322C2,(A0)+ ; FILL
+      DBF       D0,.LOOP
+      MOVE.W    #$4E75,(A0) ; RTS
+      RTS 
+
+MOTIF:LEA       BUFFER_MOTIF,A0
+      MOVEQ     #0,D0 
+      MOVE.W    #512/2-1,D7 
+.LOOP:MOVE.B    D0,D1 
+ REPT 8
+      ROXR.B    #1,D1 
+      ROXR.W    #1,D2 
+      ASR.W     #1,D2
+ ENDR
+      MOVE.W    D2,(A0)+
+      ADDQ.B    #1,D0 
+      DBF       D7,.LOOP
+      RTS 
+
+INIT_GOURAUD:
+      BSR.S     MOTIF 
+      BSR.S     GENERE 
+
+      LEA       G_LIGNES,A0 ; RED CUBE
+      MOVE.W    #6-1,D0 
+.REPT:ASL       (A0)+ 
+      ASL       (A0)+ 
+      ASL       (A0)+ 
+      ASL       (A0)+ 
+      DBF       D0,.REPT
+
+      LEA       BUFFER_Z,A0
+      MOVE.W    #160*80*1-1,D1 
+.LOOP:CLR.W     (A0)+ 
+      DBF       D1,.LOOP
+
+      MOVE.W    #0,ANGLE_X
+      MOVE.W    #0,ANGLE_Y
+      MOVE.W    #0,ANGLE_Z
+
+      MOVE.W    #$3E8,TIMING_EFFET 
+      MOVE.W    #$578,TIMING_EFFET2 
+      MOVE.W    TIMING_EFFET2,SWAP_TIMING_EFFET 
+      MOVE.B    #$FF,DECLENCHE_TIMING_EFFET
+      CLR.B     DECLENCHE_TIMING_EFFET2 
+
+      MOVE.W    #7,NB_FACE_TO_DISPLAY
+      MOVE.W    #5,NB_QUADRI_TO_DISPLAY
+      MOVE.L    #G_LIGNES,PTR_LIGNES
+      MOVE.L    #G_EMPTY,CLR_LIGNES
+      RTS
+
+SWAP_TIMER:
+      LEA       TIMER_EFF4,A0
+      MOVE.W    SWAP_TIMING_EFFET,D1
+      MOVE.W    NB_FACE_TO_DISPLAY,D0
+.LOOP:ADD.W     D1,(A0)+
+      DBF       D0,.LOOP
+      RTS 
+
+ADJUST_CURVE:
+      LEA       TIMER_EFF3,A1
+      LEA       TIMER_EFF4,A2
+      LEA       COURBE,A3
+      LEA       720(A3),A4
+      MOVE.W    ANGLE_X,D0
+      ADD.W     D0,D0 
+      MOVE.W    0(A4,D0.W),D1 
+      MOVE.W    0(A3,D0.W),D2 
+      MOVE.W    NB_FACE_TO_DISPLAY,D0
+.NBFA0:MOVE.W    D1,D3 
+      MOVE.W    D2,D4 
+      MULS      (A1),D3 
+      MULS      (A2),D4 
+      ADD.L     D4,D3 
+      ASR.L     #8,D3 
+      MOVE.W    D1,D5 
+      MOVE.W    D2,D4 
+      MULS      (A2),D5 
+      MULS      (A1),D4 
+      SUB.L     D4,D5 
+      ASR.L     #8,D5 
+      MOVE.W    D3,(A1)+
+      MOVE.W    D5,(A2)+
+      DBF       D0,.NBFA0
+      LEA       TIMER_EFF2,A0
+      LEA       TIMER_EFF4,A2
+      MOVE.W    ANGLE_Y,D0
+      ADD.W     D0,D0 
+      MOVE.W    0(A4,D0.W),D1 
+      MOVE.W    0(A3,D0.W),D2 
+      MOVE.W    NB_FACE_TO_DISPLAY,D0
+.NBFA1:MOVE.W    D1,D3 
+      MOVE.W    D2,D4 
+      MULS      (A0),D3 
+      MULS      (A2),D4 
+      ADD.L     D4,D3 
+      ASR.L     #8,D3 
+      MOVE.W    D1,D5 
+      MOVE.W    D2,D4 
+      MULS      (A2),D5 
+      MULS      (A0),D4 
+      SUB.L     D4,D5 
+      ASR.L     #8,D5 
+      MOVE.W    D3,(A0)+
+      MOVE.W    D5,(A2)+
+      DBF       D0,.NBFA1
+      LEA       TIMER_EFF2,A0
+      LEA       TIMER_EFF3,A1
+      MOVE.W    ANGLE_Z,D0
+      ADD.W     D0,D0 
+      MOVE.W    0(A4,D0.W),D1 
+      MOVE.W    0(A3,D0.W),D2 
+      MOVE.W    NB_FACE_TO_DISPLAY,D0
+.NBFA2:MOVE.W    D1,D3 
+      MOVE.W    D2,D4 
+      MULS      (A0),D3 
+      MULS      (A1),D4 
+      ADD.L     D4,D3 
+      ASR.L     #8,D3 
+      MOVE.W    D1,D5 
+      MOVE.W    D2,D4 
+      MULS      (A1),D5 
+      MULS      (A0),D4 
+      SUB.L     D4,D5 
+      ASR.L     #8,D5 
+      MOVE.W    D3,(A0)+
+      MOVE.W    D5,(A1)+
+      DBF       D0,.NBFA2
+      RTS 
+
+TIMER_EFFECTS:
+      LEA       TIMER_EFF2,A0
+      LEA       TIMER_EFF3,A1
+      LEA       TIMER_EFF4,A2
+      LEA       TIMER_EFF1,A3
+      MOVE.W    #$40,D2 
+      MOVE.W    #$32,D3 
+      MOVE.W    NB_FACE_TO_DISPLAY,D4
+.LOOP:MOVE.W    (A2)+,D0
+      ADDI.W    #$80,D0 
+      MOVE.W    (A0)+,D1
+      EXT.L     D1
+      ASL.W     #7,D1 
+      DIVS      D0,D1 
+      ADD.W     D2,D1 
+      MOVE.W    D1,(A3)+
+      MOVE.W    (A1)+,D1
+      EXT.L     D1
+      ASL.W     #7,D1 
+      DIVS      D0,D1 
+      ADD.W     D3,D1 
+      MOVE.W    D1,(A3)+
+      DBF       D4,.LOOP
+      RTS 
+
+FILED_SQUARE:
+      LEA       TAB0,A0
+      LEA       TAB1,A1
+      LEA       TAB2,A2
+      LEA       TIMER_EFF2,A3
+      LEA       TIMER_EFF3,A4
+      LEA       TIMER_EFF4,A5
+      MOVE.W    NB_FACE_TO_DISPLAY,D0
+.LOOP:MOVE.W    (A0)+,(A3)+ 
+      MOVE.W    (A1)+,(A4)+ 
+      MOVE.W    (A2)+,(A5)+ 
+      DBF       D0,.LOOP
+      RTS 
+
+INIT_MOTIF_GOURAUD:
+      LEA       REMPLISSAGE_MOTIF,A0
+      MOVE.L    #$7F0000,D1 
+      MOVE.W    #24,D0 
+.LOOP:MOVE.L    D1,(A0)+
+      MOVE.L    D1,(A0)+
+      MOVE.L    D1,(A0)+
+      MOVE.L    D1,(A0)+
+      DBF       D0,.LOOP
+      MOVE.W    #99,NB_LINE_MOTIF
+      CLR.W     CPT_LINE_MOTIF 
+      RTS 
+
+PUT_PIXEL_GOURAUD:
+      LEA       P_FACE,A0
+      LEA       B_FACE,A1
+      MOVEQ     #8,D3 
+      MOVE.L    (A0),D0 
+      MOVE.W    16(A0),D1 
+      CMP.W     6(A0),D0
+      BMI.S     NP_01 
+      MOVE.L    4(A0),D0
+      MOVE.W    18(A0),D1 
+      MOVEQ     #4,D3 
+NP_01:CMP.W     10(A0),D0 
+      BMI.S     NP_02 
+      MOVE.L    8(A0),D0
+      MOVE.W    20(A0),D1 
+      MOVEQ     #2,D3 
+NP_02:CMP.W     14(A0),D0 
+      BMI.S     NP_03 
+      MOVE.L    12(A0),D0 
+      MOVE.W    22(A0),D1 
+      MOVEQ     #1,D3 
+NP_03:MOVE.L    D0,(A1) 
+      MOVE.W    D1,16(A1) 
+      BTST      #3,D3 
+      BNE.S     NP_04 
+      MOVE.L    (A0),D0 
+      MOVE.W    16(A0),D1 
+      MOVEQ     #3,D2 
+      BRA.S     NP_05 
+NP_04:MOVE.L    4(A0),D0
+      MOVE.W    18(A0),D1 
+      MOVEQ     #2,D2 
+NP_05:CMP.W     2(A0),D0
+      BPL.S     NP_06 
+      BTST      #3,D3 
+      BNE.S     NP_06 
+      MOVE.L    (A0),D0 
+      MOVE.W    16(A0),D1 
+      MOVEQ     #3,D2 
+NP_06:CMP.W     6(A0),D0
+      BPL.S     NP_07 
+      BTST      #2,D3 
+      BNE.S     NP_07 
+      MOVE.L    4(A0),D0
+      MOVE.W    18(A0),D1 
+      MOVEQ     #2,D2 
+NP_07:CMP.W     10(A0),D0 
+      BPL.S     NP_08 
+      BTST      #1,D3 
+      BNE.S     NP_08 
+      MOVE.L    8(A0),D0
+      MOVE.W    20(A0),D1 
+      MOVEQ     #1,D2 
+NP_08:CMP.W     14(A0),D0 
+      BPL.S     NP_09 
+      BTST      #0,D3 
+      BNE.S     NP_09 
+      MOVE.L    12(A0),D0 
+      MOVE.W    22(A0),D1 
+      MOVEQ     #0,D2 
+NP_09:BSET      D2,D3 
+      MOVE.L    D0,12(A1) 
+      MOVE.W    D1,22(A1) 
+      BTST      #3,D3 
+      BNE.S     NP_10 
+      MOVE.L    (A0),4(A1)
+      MOVE.W    16(A0),18(A1) 
+      MOVEQ     #3,D2 
+NP_10:BTST      #2,D3 
+      BNE.S     NP_11 
+      MOVE.L    4(A0),4(A1) 
+      MOVE.W    18(A0),18(A1) 
+      MOVEQ     #2,D2 
+NP_11:BTST      #1,D3 
+      BNE.S     NP_12 
+      MOVE.L    8(A0),4(A1) 
+      MOVE.W    20(A0),18(A1) 
+      MOVEQ     #1,D2 
+NP_12:BTST      #0,D3 
+      BNE.S     NP_13 
+      MOVE.L    12(A0),4(A1)
+      MOVE.W    22(A0),18(A1) 
+      MOVEQ     #0,D2 
+NP_13:BSET      D2,D3 
+      BTST      #3,D3 
+      BNE.S     NP_14 
+      MOVE.L    (A0),8(A1)
+      MOVE.W    16(A0),20(A1) 
+      MOVEQ     #3,D2 
+NP_14:BTST      #2,D3 
+      BNE.S     NP_15 
+      MOVE.L    4(A0),8(A1) 
+      MOVE.W    18(A0),20(A1) 
+      MOVEQ     #2,D2 
+NP_15:BTST      #1,D3 
+      BNE.S     NP_16 
+      MOVE.L    8(A0),8(A1) 
+      MOVE.W    20(A0),20(A1) 
+      MOVEQ     #1,D2 
+NP_16:BTST      #0,D3 
+      BNE.S     NEXTP
+      MOVE.L    12(A0),8(A1)
+      MOVE.W    22(A0),20(A1) 
+      MOVEQ     #0,D2 
+NEXTP:BSET      D2,D3 
+      MOVE.L    4(A1),D0
+      CMP.W     10(A1),D0 
+      BLT       WP_03 
+      BNE       WP_02 
+      MOVE.W    (A1),D2 
+      CMP.W     12(A1),D2 
+      BGT.S     WP_01 
+      MOVE.W    4(A1),D1
+      CMP.W     8(A1),D1
+      BGT.S     WP_02 
+      BRA.S     WP_03 
+WP_01:MOVE.W    4(A1),D1
+      CMP.W     8(A1),D1
+      BGE.S     WP_03 
+WP_02:MOVE.L    8(A1),4(A1) 
+      MOVE.L    D0,8(A1)
+      MOVE.W    18(A1),D0 
+      MOVE.W    20(A1),18(A1) 
+      MOVE.W    D0,20(A1) 
+WP_03:MOVE.W    14(A1),D1 
+      MOVE.W    2(A1),D2
+      SUB.W     D2,D1 
+      ADDQ.W    #1,D1 
+      MOVE.W    12(A1),D0 
+      SUB.W     (A1),D0 
+      EXT.L     D0
+      ASL.W     #6,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,D3 
+      MOVE.W    D0,D4 
+      MOVE.W    6(A1),D1
+      SUB.W     2(A1),D1
+      MULS      D1,D3 
+      ASR.W     #6,D3 
+      ADD.W     (A1),D3 
+      CMP.W     4(A1),D3
+      BPL.S     IWP04 
+      MOVE.B    #1,TEST_D0
+      BRA.S     WP_04 
+IWP04:MOVE.B    #0,TEST_D0
+WP_04:MOVE.W    10(A1),D1 
+      SUB.W     2(A1),D1
+      MULS      D1,D0 
+      ASR.W     #6,D0 
+      ADD.W     (A1),D0 
+      CMP.W     8(A1),D0
+      BPL.S     IWP05 
+      MOVE.B    #1,TEST_ALL
+      BRA.S     WP_05 
+IWP05:MOVE.B    #0,TEST_ALL
+WP_05:MOVE.W    TEST_D0,D0
+      CMP.W     #0,D0 
+      BEQ.S     WP_06 
+      CMP.W     #$101,D0
+      BEQ       WP_07 
+      CMP.W     #1,D0 
+      BEQ       WP_08 
+      CMP.W     #$100,D0
+      BEQ       WP_09 
+WP_06:MOVE.W    D4,28(A1) 
+      MOVE.W    D4,32(A1) 
+      MOVE.W    D4,36(A1) 
+      MOVE.W    6(A1),D1
+      SUB.W     2(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    4(A1),D0
+      SUB.W     (A1),D0 
+      EXT.L     D0
+      ASL.W     #6,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,26(A1) 
+      MOVE.W    10(A1),D1 
+      SUB.W     6(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    8(A1),D0
+      SUB.W     4(A1),D0
+      EXT.L     D0
+      ASL.W     #6,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,30(A1) 
+      MOVE.W    14(A1),D1 
+      SUB.W     10(A1),D1 
+      ADDQ.W    #1,D1 
+      MOVE.W    12(A1),D0 
+      SUB.W     8(A1),D0
+      EXT.L     D0
+      ASL.W     #6,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,34(A1) 
+      MOVE.W    6(A1),D1
+      SUB.W     2(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    18(A1),D0 
+      SUB.W     16(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,38(A1) 
+      MOVE.W    10(A1),D1 
+      SUB.W     6(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    20(A1),D0 
+      SUB.W     18(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,42(A1) 
+      MOVE.W    14(A1),D1 
+      SUB.W     10(A1),D1 
+      ADDQ.W    #1,D1 
+      MOVE.W    22(A1),D0 
+      SUB.W     20(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,46(A1) 
+      MOVE.W    14(A1),D1 
+      SUB.W     2(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    22(A1),D0 
+      SUB.W     16(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,40(A1) 
+      MOVE.W    D0,44(A1) 
+      MOVE.W    D0,48(A1) 
+      BRA       FILL_IT 
+WP_07:MOVE.W    D4,26(A1) 
+      MOVE.W    D4,30(A1) 
+      MOVE.W    D4,34(A1) 
+      MOVE.W    6(A1),D1
+      SUB.W     2(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    4(A1),D0
+      SUB.W     (A1),D0 
+      EXT.L     D0
+      ASL.W     #6,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,28(A1) 
+      MOVE.W    10(A1),D1 
+      SUB.W     6(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    8(A1),D0
+      SUB.W     4(A1),D0
+      EXT.L     D0
+      ASL.W     #6,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,32(A1) 
+      MOVE.W    14(A1),D1 
+      SUB.W     10(A1),D1 
+      ADDQ.W    #1,D1 
+      MOVE.W    12(A1),D0 
+      SUB.W     8(A1),D0
+      EXT.L     D0
+      ASL.W     #6,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,36(A1) 
+      MOVE.W    6(A1),D1
+      SUB.W     2(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    18(A1),D0 
+      SUB.W     16(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,40(A1) 
+      MOVE.W    10(A1),D1 
+      SUB.W     6(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    20(A1),D0 
+      SUB.W     18(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,44(A1) 
+      MOVE.W    14(A1),D1 
+      SUB.W     10(A1),D1 
+      ADDQ.W    #1,D1 
+      MOVE.W    22(A1),D0 
+      SUB.W     20(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,48(A1) 
+      MOVE.W    14(A1),D1 
+      SUB.W     2(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    22(A1),D0 
+      SUB.W     16(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,38(A1) 
+      MOVE.W    D0,42(A1) 
+      MOVE.W    D0,46(A1) 
+      BRA       FILL_IT 
+WP_08:MOVE.W    6(A1),D1
+      SUB.W     2(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    4(A1),D0
+      SUB.W     (A1),D0 
+      EXT.L     D0
+      ASL.W     #6,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,26(A1) 
+      MOVE.W    14(A1),D1 
+      SUB.W     6(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    12(A1),D0 
+      SUB.W     4(A1),D0
+      EXT.L     D0
+      ASL.W     #6,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,30(A1) 
+      MOVE.W    D0,34(A1) 
+      MOVE.W    10(A1),D1 
+      SUB.W     2(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    8(A1),D0
+      SUB.W     (A1),D0 
+      EXT.L     D0
+      ASL.W     #6,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,28(A1) 
+      MOVE.W    D0,32(A1) 
+      MOVE.W    14(A1),D1 
+      SUB.W     10(A1),D1 
+      ADDQ.W    #1,D1 
+      MOVE.W    12(A1),D0 
+      SUB.W     8(A1),D0
+      EXT.L     D0
+      ASL.W     #6,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,36(A1) 
+      MOVE.W    6(A1),D1
+      SUB.W     2(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    18(A1),D0 
+      SUB.W     16(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,38(A1) 
+      MOVE.W    14(A1),D1 
+      SUB.W     6(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    22(A1),D0 
+      SUB.W     18(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,42(A1) 
+      MOVE.W    D0,46(A1) 
+      MOVE.W    10(A1),D1 
+      SUB.W     2(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    20(A1),D0 
+      SUB.W     16(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,40(A1) 
+      MOVE.W    D0,44(A1) 
+      MOVE.W    14(A1),D1 
+      SUB.W     10(A1),D1 
+      ADDQ.W    #1,D1 
+      MOVE.W    22(A1),D0 
+      SUB.W     20(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,48(A1) 
+      BRA       FILL_IT 
+WP_09:MOVE.W    6(A1),D1
+      SUB.W     2(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    4(A1),D0
+      SUB.W     (A1),D0 
+      EXT.L     D0
+      ASL.W     #6,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,28(A1) 
+      MOVE.W    14(A1),D1 
+      SUB.W     6(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    12(A1),D0 
+      SUB.W     4(A1),D0
+      EXT.L     D0
+      ASL.W     #6,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,32(A1) 
+      MOVE.W    D0,36(A1) 
+      MOVE.W    10(A1),D1 
+      SUB.W     2(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    8(A1),D0
+      SUB.W     (A1),D0 
+      EXT.L     D0
+      ASL.W     #6,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,26(A1) 
+      MOVE.W    D0,30(A1) 
+      MOVE.W    14(A1),D1 
+      SUB.W     10(A1),D1 
+      ADDQ.W    #1,D1 
+      MOVE.W    12(A1),D0 
+      SUB.W     8(A1),D0
+      EXT.L     D0
+      ASL.W     #6,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,34(A1) 
+      MOVE.W    6(A1),D1
+      SUB.W     2(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    18(A1),D0 
+      SUB.W     16(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,40(A1) 
+      MOVE.W    14(A1),D1 
+      SUB.W     6(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    22(A1),D0 
+      SUB.W     18(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,44(A1) 
+      MOVE.W    D0,48(A1) 
+      MOVE.W    10(A1),D1 
+      SUB.W     2(A1),D1
+      ADDQ.W    #1,D1 
+      MOVE.W    20(A1),D0 
+      SUB.W     16(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,38(A1) 
+      MOVE.W    D0,42(A1) 
+      MOVE.W    14(A1),D1 
+      SUB.W     10(A1),D1 
+      ADDQ.W    #1,D1 
+      MOVE.W    22(A1),D0 
+      SUB.W     20(A1),D0 
+      EXT.L     D0
+      ASL.W     #8,D0 
+      DIVS      D1,D0 
+      MOVE.W    D0,46(A1) 
+
+FILL_IT:LEA       BUFFER_Z,A0
+      LEA       B_FACE,A6
+      LEA       CODE_GENERE,A3
+      LEA       REMPLISSAGE_MOTIF,A4
+      MOVEA.W   #$100,A5
+      MOVE.W    2(A6),D0
+      MOVE.W    14(A6),D1 
+      CMP.W     NB_LINE_MOTIF,D0
+      BGE.S     TSTDO 
+      MOVE.W    D0,NB_LINE_MOTIF
+TSTDO:CMP.W     CPT_LINE_MOTIF,D1
+      BLE.S     TSTD1 
+      MOVE.W    D1,CPT_LINE_MOTIF
+TSTD1:ADD.W     D0,D0 
+      ADD.W     D0,D0 
+      ADDA.W    D0,A4 
+      ASL.W     #6,D0 
+      ADDA.W    D0,A0 
+      MOVE.W    (A6),D4 
+      ASL.W     #6,D4 
+      MOVE.W    D4,D5 
+      MOVE.W    16(A6),D6 
+      ASL.W     #8,D6 
+      MOVE.W    D6,D7 
+      MOVE.W    6(A6),D2
+      SUB.W     2(A6),D2
+      SUBQ.W    #1,D2 
+      BMI.S     NOLP01 
+      MOVE.W    D2,50(A6) 
+.LP01:ADD.W     26(A6),D4 
+      ADD.W     28(A6),D5 
+      ADD.W     38(A6),D6 
+      ADD.W     40(A6),D7 
+      BSR       QUADRI_GENERATED 
+      ADDA.W    A5,A0 
+      SUBQ.W    #1,50(A6) 
+      BPL.S     .LP01 
+NOLP01:MOVE.W    10(A6),D2 
+      SUB.W     6(A6),D2
+      SUBQ.W    #1,D2 
+      BMI.S     LP03 
+      MOVE.W    D2,50(A6) 
+      CMPI.B    #1,24(A6) 
+      BEQ.S     MOR02 
+      MOVE.W    4(A6),D4
+      ASL.W     #6,D4 
+      MOVE.W    18(A6),D6 
+      ASL.W     #8,D6 
+      BRA.S     LP02 
+MOR02:MOVE.W    4(A6),D5
+      ASL.W     #6,D5 
+      MOVE.W    18(A6),D7 
+      ASL.W     #8,D7 
+LP02: ADD.W     30(A6),D4 
+      ADD.W     32(A6),D5 
+      ADD.W     42(A6),D6 
+      ADD.W     44(A6),D7 
+      BSR       QUADRI_GENERATED 
+      ADDA.W    A5,A0 
+      SUBQ.W    #1,50(A6) 
+      BPL.S     LP02 
+LP03: MOVE.W    14(A6),D2 
+      SUB.W     10(A6),D2 
+      MOVE.W    D2,50(A6) 
+      CMPI.B    #1,25(A6) 
+      BEQ.S     LAS04 
+      MOVE.W    8(A6),D4
+      ASL.W     #6,D4 
+      MOVE.W    20(A6),D6 
+      ASL.W     #8,D6 
+      BRA.S     TSTIT 
+LAS04:MOVE.W    8(A6),D5
+      ASL.W     #6,D5 
+      MOVE.W    20(A6),D7 
+      ASL.W     #8,D7 
+TSTIT:TST.W     D2
+      BEQ.S     GENIT 
+LP05: ADD.W     34(A6),D4 
+      ADD.W     36(A6),D5 
+      ADD.W     46(A6),D6 
+      ADD.W     48(A6),D7 
+GENIT:BSR       QUADRI_GENERATED 
+      ADDA.W    A5,A0 
+      SUBQ.W    #1,50(A6) 
+      BPL.S     LP05 
+      RTS 
+
+QUADRI_GENERATED:
+      MOVEQ     #0,D2 
+      MOVEQ     #0,D3 
+      MOVE.W    D6,D2 
+      MOVE.W    D7,D3 
+      MOVE.W    D4,D0 
+      ASR.W     #5,D0 
+      MOVE.W    D0,D1 
+      ANDI.B    #$FE,D1 
+      LEA       0(A0,D1.W),A1 
+      ASR.W     #1,D0 
+      CMP.W     (A4)+,D0
+      BGE.S     .NEXT 
+      MOVE.W    D0,-2(A4) 
+.NEXT:MOVE.W    D5,D1 
+      ASR.W     #6,D1 
+      CMP.W     (A4)+,D1
+      BLE.S     .DDIT 
+      MOVE.W    D1,-2(A4) 
+.DDIT:SUB.W     D0,D1 
+      BMI.S     NOWAY 
+      MOVE.W    D1,D0 
+      ADDQ.W    #1,D1 
+      SUB.L     D2,D3 
+      DIVS      D1,D3 
+      MOVEA.W   D3,A2 
+      ADD.W     D3,D3 
+      SWAP      D3
+      MOVE.W    A2,D3 
+      ADD.W     D3,D3 
+      MOVE.W    D2,D1 
+      SUB.W     A2,D2 
+      SWAP      D2
+      MOVE.W    D1,D2 
+      ASR.W     #1,D0 
+      BCS.S     .ALSO 
+      ADD.W     A2,D2 
+      MOVE.W    D2,(A1)+
+      SUBQ.W    #1,D0 
+      BMI.S     NOWAY 
+      SWAP      D2
+      ADD.W     A2,D2 
+      SWAP      D2
+.ALSO:ADDQ.W    #1,D0 
+      ADD.W     D0,D0 
+      ADD.W     D0,D0 
+      MOVE.W    #$4E75,0(A3,D0.W) 
+      JSR       (A3)
+      MOVE.W    #$D483,0(A3,D0.W) 
+NOWAY:RTS 
+
+DISPLAY_PIXEL_GOURAUD:
+      LEA       TIMER_EFF1,A0
+      MOVEA.L   PTR_LIGNES,A1
+      MOVEA.L   CLR_LIGNES,A3
+      LEA       P_FACE,A2
+      MOVE.W    NB_QUADRI_TO_DISPLAY,D1
+.LOOP:MOVE.W    (A1)+,D0
+      MOVE.W    0(A3,D0.W),16(A2) 
+      ADD.W     D0,D0 
+      MOVE.L    0(A0,D0.W),D2 
+      MOVE.W    (A1)+,D0
+      MOVE.W    0(A3,D0.W),18(A2) 
+      ADD.W     D0,D0 
+      MOVE.L    0(A0,D0.W),D3 
+      MOVE.W    (A1)+,D0
+      MOVE.W    0(A3,D0.W),20(A2) 
+      ADD.W     D0,D0 
+      MOVE.L    0(A0,D0.W),D4 
+      MOVE.W    (A1)+,D0
+      MOVE.W    0(A3,D0.W),22(A2) 
+      ADD.W     D0,D0 
+      MOVE.L    0(A0,D0.W),12(A2) 
+      MOVE.L    D2,D0 
+      SWAP      D0
+      MOVE.L    D3,D5 
+      SWAP      D5
+      MOVE.L    D4,D6 
+      SWAP      D6
+      MOVEA.L   D0,A4 
+      MOVEA.L   D2,A5 
+      SUB.W     D5,D0 
+      SUB.W     D4,D2 
+      MULS      D2,D0 
+      MOVE.W    D0,D7 
+      MOVE.L    A4,D0 
+      MOVE.L    A5,D2 
+      SUB.W     D6,D0 
+      SUB.W     D3,D2 
+      MULS      D2,D0 
+      CMP.W     D0,D7 
+      BLE.S     .NEXT 
+      MOVE.L    A5,(A2) 
+      MOVE.L    D3,4(A2)
+      MOVE.L    D4,8(A2)
+      MOVEM.L   A0-A3/D1,-(A7)
+      BSR       PUT_PIXEL_GOURAUD 
+      MOVEM.L   (A7)+,A0-A3/D1
+.NEXT:DBF       D1,.LOOP
+      RTS 
+
+DISPLAY_GOURAUD_EFFECT:
+      BSR	get_Screen_To_display_A1
+      SUBA.W    #160*15-8*2,A1 
+      LEA       BUFFER_Z,A3
+      LEA       REMPLISSAGE_MOTIF,A2
+      LEA       BUFFER_MOTIF,A5
+      MOVE.W    CPT_LINE_MOTIF,D1
+      MOVE.W    NB_LINE_MOTIF,D0
+      SUB.W     D0,D1 
+      MOVE.W    D1,COUNTER_TEMPO
+      ADD.W     D0,D0 
+      ADD.W     D0,D0 
+      ADDA.W    D0,A2 
+      ASL.W     #6,D0 
+      ADDA.W    D0,A3 
+      MOVE.W    NB_LINE_MOTIF,D0
+      MULU      #$140,D0
+      ADDA.W    D0,A1 
+BLOOP:MOVE.W    (A2)+,D0
+      MOVE.W    (A2)+,D7
+      SUB.W     D0,D7 
+      BMI.S     REDONE 
+      MOVE.W    D0,D2 
+      ADD.W     D2,D2 
+      LEA       0(A3,D2.W),A4 
+      MOVE.W    D0,D6 
+      NOT.W     D6
+      ANDI.W    #7,D6 
+      SUB.W     D6,D7 
+      BPL.S     .INIT 
+      MOVE.W    D7,D5 
+      NEG.W     D5
+      ADD.W     D7,D6 
+      BRA.S     .ANDI 
+.INIT:MOVEQ     #0,D5 
+.ANDI:ANDI.W    #$FFF8,D0 
+      LEA       0(A1,D0.W),A0 
+      BSR       PUT_PIXEL 
+      SUBQ.W    #1,D7 
+      BMI.S     REDONE 
+      MOVE.W    D7,D6 
+      SUBQ.W    #8,D6 
+      BMI.S     .THEN 
+      ASR.W     #3,D6 
+.LOOP:BSR       PUT_PIXEL2 
+      DBF       D6,.LOOP
+.THEN:ANDI.W    #7,D7 
+      MOVE.W    D7,D6 
+      NOT.W     D7
+      ANDI.W    #7,D7 
+      MOVE.W    D7,D5 
+      BSR       PUT_PIXEL 
+REDONE:LEA       320(A1),A1
+      LEA       256(A3),A3
+      SUBQ.W    #1,COUNTER_TEMPO
+      BPL.S     BLOOP 
+      RTS 
+
+PUT_PIXEL:
+      MOVEQ     #0,D0 
+      MOVEQ     #0,D1 
+      MOVEQ     #0,D2 
+      MOVEQ     #0,D3 
+.LOOP:MOVE.W    (A4)+,D4
+      ADD.W     D4,D4 
+      ADDX.W    D0,D0 
+      ADD.W     D4,D4 
+      ADDX.W    D1,D1 
+      ADD.W     D4,D4 
+      ADDX.W    D2,D2 
+      ADD.W     D4,D4 
+      ADDX.W    D3,D3 
+      DBF       D6,.LOOP
+      ADDQ.W    #1,D5 
+      LSL.W     D5,D0 
+      LSL.W     D5,D1 
+      LSL.W     D5,D2 
+      LSL.W     D5,D3 
+      MOVE.W    0(A5,D0.W),D0 
+      MOVE.W    0(A5,D1.W),D1 
+      MOVE.W    0(A5,D2.W),D2 
+      MOVE.W    0(A5,D3.W),D3 
+      MOVE.W    D3,160(A0)
+      MOVE.W    D2,162(A0)
+      MOVE.W    D1,164(A0)
+      MOVE.W    D0,166(A0)
+      MOVE.W    D3,(A0)+
+      MOVE.W    D2,(A0)+
+      MOVE.W    D1,(A0)+
+      MOVE.W    D0,(A0)+
+      RTS 
+
+PUT_PIXEL2:
+      MOVEQ     #0,D0 
+      MOVEQ     #0,D1 
+      MOVEQ     #0,D2 
+      MOVEQ     #0,D3 
+ REPT 8
+      MOVE.W    (A4)+,D4
+      ADD.W     D4,D4 
+      ADDX.W    D0,D0 
+      ADD.W     D4,D4 
+      ADDX.W    D1,D1 
+      ADD.W     D4,D4 
+      ADDX.W    D2,D2 
+      ADD.W     D4,D4 
+      ADDX.W    D3,D3 
+ ENDR
+      ADD.W     D0,D0 
+      ADD.W     D1,D1 
+      ADD.W     D2,D2 
+      ADD.W     D3,D3 
+      MOVE.W    0(A5,D0.W),D0 
+      MOVE.W    0(A5,D1.W),D1 
+      MOVE.W    0(A5,D2.W),D2 
+      MOVE.W    0(A5,D3.W),D3 
+      MOVE.W    D3,160(A0)
+      MOVE.W    D2,162(A0)
+      MOVE.W    D1,164(A0)
+      MOVE.W    D0,166(A0)
+      MOVE.W    D3,(A0)+
+      MOVE.W    D2,(A0)+
+      MOVE.W    D1,(A0)+
+      MOVE.W    D0,(A0)+
+      RTS 
+
+TIMINGS:
+      TST.B     DECLENCHE_TIMING_EFFET 
+      BLT.S     TIMER_L 
+      BGT.S     TIMER_G 
+      TST.W     SWAP_TIMING_EFFET2 
+      BPL.S     END_TIMER 
+      MOVE.B    #1,DECLENCHE_TIMING_EFFET
+END_TIMER:
+      RTS 
+
+TIMER_L:
+      CMPI.W    #$212,SWAP_TIMING_EFFET 
+      BEQ.S     SWAP_TIMER1 
+      SUBI.W    #$A,SWAP_TIMING_EFFET 
+      RTS 
+SWAP_TIMER1:
+      MOVE.B    #0,DECLENCHE_TIMING_EFFET
+      MOVE.W    TIMING_EFFET,SWAP_TIMING_EFFET2 
+      RTS 
+TIMER_G:
+      MOVE.W    SWAP_TIMING_EFFET,D1
+      CMP.W     TIMING_EFFET2,D1
+      BEQ.S     SWAP_TIMER2 
+      ADDI.W    #$A,SWAP_TIMING_EFFET 
+      RTS 
+SWAP_TIMER2:
+      MOVE.B    #0,DECLENCHE_TIMING_EFFET
+      MOVE.W    TIMING_EFFET,SWAP_TIMING_EFFET2 
+      ST        DECLENCHE_TIMING_EFFET2 
+      RTS 
+
+VITESSE EQU 3
+INC_COMPTEURS:
+      ADDQ.W    #VITESSE,ANGLE_X
+      CMPI.W    #360,ANGLE_X 
+      BNE.S     .ANGLE_Y 
+      CLR.W     ANGLE_X 
+.ANGLE_Y:
+      ADDQ.W    #VITESSE,ANGLE_Y
+      CMPI.W    #360,ANGLE_Y 
+      BNE.S     .ANGLE_Z 
+      CLR.W     ANGLE_Y 
+.ANGLE_Z:
+      ADDQ.W    #VITESSE,ANGLE_Z
+      CMPI.W    #360,ANGLE_Z 
+      BNE.S     NO_COMPTEUR 
+      CLR.W     ANGLE_Z 
+NO_COMPTEUR:
+      RTS 
+
+TIMER_EFFECT:
+      LEA       TIMER_EFF4,A0
+      MOVEA.L   CLR_LIGNES,A1
+      MOVE.W    #$FE,D2 
+      MOVE.W    #$132,D4
+      MOVE.W    NB_FACE_TO_DISPLAY,D0
+FILED:MOVE.W    (A0)+,D1
+      SUB.W     D4,D1 
+      ASR.W     #1,D1 
+      MOVE.W    D2,D3 
+      SUB.W     D1,D3 
+      BGE.S     .NEXT 
+      MOVEQ     #0,D3 
+.NEXT:MOVE.W    D3,(A1)+
+      DBF       D0,FILED
+      RTS 
+
+; SQUARE
+G_LIGNES:
+	DC.W 0,1,2,3
+	DC.W 7,6,5,4
+	DC.W 2,6,7,3
+	DC.W 0,3,7,4
+	DC.W 1,0,4,5
+	DC.W 1,5,6,2
+G_EMPTY:
+	DC.W	0,0,0,0
+	DC.W	0,0,0,0
+UN EQU $FF7E	;	THE BITPLAN
+DE EQU $0082-38 ; SIZE OF CUBE
+; TAB DE MES LIGNES
+TAB0:
+	DC.W	UN,DE,DE,UN
+	DC.W	UN,DE,DE,UN
+TAB1:
+	DC.W	UN,UN,DE,DE
+	DC.W	UN,UN,DE,DE
+TAB2:
+	DC.W	UN,UN,UN,UN
+	DC.W	DE,DE,DE,DE
+COURBE:
+	INCBIN	"E:\SO_FAST\DATA\COURBE.DAT"
+	EVEN

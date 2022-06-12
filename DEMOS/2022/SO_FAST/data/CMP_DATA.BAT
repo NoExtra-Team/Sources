@@ -1,0 +1,12 @@
+REM - NOEXTRA COMPRESSION DATA KIT -
+@cls
+@echo on
+del ELITE.LZ4
+cut_pi1.exe ..\_gfx\ELITE.PI1 ELITE.IMG 0 18
+lz4.exe -9 -zq ELITE.IMG ELITE.LZ4
+del ELITE.IMG
+del DROITE.LZ4
+cut_pi1.exe ..\_gfx\DROITE.PI1 DROITE.IMG 0 200
+lz4.exe -9 -zq DROITE.IMG DROITE.LZ4
+del DROITE.IMG
+@echo off
