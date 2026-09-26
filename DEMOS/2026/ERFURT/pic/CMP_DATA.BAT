@@ -1,0 +1,40 @@
+@echo off
+@cls
+REM ------------------------------------------------------
+REM -*-   NOEXTRA CUT PICTURES KIT    -*-
+REM ------------------------------------------------------
+set FOLDER-BIN=..\_bin\
+set FOLDER-PI1=..\_gfx\
+set FOLDER-COMP=..\pic\
+
+DEL CMP_DATA.BAT.bak 2>NUL
+DEL *.IMG 2>NUL
+DEL *.PAL 2>NUL
+DEL *.LZ4 2>NUL
+
+:: GFX_001 --- MISTER.A PICTURE ---
+set NAME-GFX_001=DAMIER
+del %FOLDER-COMP%%NAME-GFX_001%.IMG 2>NUL
+@echo on
+%FOLDER-BIN%cut_pi1.exe %FOLDER-PI1%%NAME-GFX_001%.PI1 %FOLDER-COMP%%NAME-GFX_001%.IMG 0 80
+@echo off
+
+:: GFX_002 --- NYTRIK PICTURE ---
+set NAME-GFX_002=NOEXTRA
+del %FOLDER-COMP%%NAME-GFX_002%.IMG 2>NUL
+@echo on
+%FOLDER-BIN%cut_pi1.exe %FOLDER-PI1%%NAME-GFX_002%.PI1 %FOLDER-COMP%%NAME-GFX_002%.IMG 0 76
+@echo off
+
+:: GFX_002 --- NYTRIK PICTURE ---
+set NAME-GFX_003=ERFURT1
+del %FOLDER-COMP%%NAME-GFX_003%.IMG 2>NUL
+@echo on
+%FOLDER-BIN%cut_pi1.exe %FOLDER-PI1%%NAME-GFX_003%.PI1 %FOLDER-COMP%%NAME-GFX_003%.IMG 0 200
+%FOLDER-BIN%cut_pal.exe %FOLDER-PI1%%NAME-GFX_003%.PI1 %FOLDER-COMP%%NAME-GFX_003%.PAL
+%FOLDER-BIN%lz4.exe -9 -zq %FOLDER-COMP%%NAME-GFX_003%.IMG %FOLDER-COMP%%NAME-GFX_003%.LZ4
+@echo off
+
+:End_of_file
+PAUSE
+EXIT
