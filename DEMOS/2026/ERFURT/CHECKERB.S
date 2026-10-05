@@ -9,7 +9,7 @@
 * // Gfx font      : Mister.A      // *
 * // Music         : AD/HMD        // *
 * // Release date  : 10/09/2026    // *
-* // Update date   : 26/09/2026    // *
+* // Update date   : 05/10/2026    // *
 ***************************************
   OPT c+ ; Case sensitivity ON        *
   OPT d- ; Debug OFF                  *
@@ -110,12 +110,12 @@ default_loop:
 
 * < Put your code here >
 
-	jsr	play_ScrollTexte
+	jsr	play_ScrollTexte             ; Big one bitplane Scrolltext
 
-	jsr	Clean_OneBitplane_Generated
-	jsr display_Bitbend
+	jsr	Clean_OneBitplane_Generated  ; Little bitbend one bitplane Scrolltext
+	jsr display_Bitbend              ;
 	
-	jsr	floppy_Led
+	jsr	floppy_Led                   ; Flash floppy LED with special music chanel
 
 * <
 
@@ -439,7 +439,7 @@ Hbl_scrolling:
 
 Hbl_ligneB:
 	clr.b	$fffffa1b.w
-	dcb.w	76,$4e71                   ; Synchro
+	dcb.w	76-4,$4e71                   ; Synchro blank line
 	move.w	#$777,$ffff8240.w
 	move.l	#Hbl_fin,$120.w 
 	move.b	#1,$fffffa21.w
@@ -644,11 +644,11 @@ Save_and_init_st:
 
  IFEQ	NO_BORDER
 * // Code here....
-	CLR.B     $FFFFFA07.W 
-	CLR.B     $FFFFFA09.W 
-	CLR.B     $FFFFFA1B.W 
-	ORI.B     #1,$FFFFFA07.W
-	ORI.B     #1,$FFFFFA13.W
+	clr.b	$fffffa07.w 
+	clr.b	$fffffa09.w 
+	clr.b	$fffffa1b.w 
+	ori.b	#1,$fffffa07.w
+	ori.b	#1,$fffffa13.w
 	bclr #3,$fffffa17.w              ; Automatic End-Interrupt hbl ON
  ENDC
 
@@ -828,9 +828,9 @@ NoExtra_img:	even
 	even
 
 Intro_pal:	even
-	incbin	"E:\ERFURT20.26\pic\ERFURT1.PAL"
+	incbin	"E:\ERFURT20.26\pic\ERFURT3.PAL"
 Intro_img:	even
-	incbin	"E:\ERFURT20.26\pic\ERFURT1.LZ4"
+	incbin	"E:\ERFURT20.26\pic\ERFURT3.LZ4"
 	even
 
 * <
